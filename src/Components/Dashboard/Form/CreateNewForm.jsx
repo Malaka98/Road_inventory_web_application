@@ -19,6 +19,8 @@ import axios from "axios";
 import pic from './empty.png'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
+import { useHistory} from "react-router-dom"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -56,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
 function ComplexGrid() {
   const classes = useStyles();
   const fileInput = useRef(null);
-
+  const history = useHistory()
   const [picUrl, setpicUrl] = useState(pic)
   
 
@@ -292,6 +294,7 @@ function ComplexGrid() {
         .then(function (response) {
           //handle success
           console.log(response);
+          history.push('/dashboard')
         })
         .catch(function (response) {
           //handle error
@@ -587,7 +590,7 @@ function ComplexGrid() {
                   justify="center"
                   alignItems="center"
                 >
-                 <img src={picUrl} className={classes.pic} style={{maxWidth: matches?"400px":"200px", maxHeight:  matches?"400px":"200px", marginBottom: "20px"}}/>
+                 <img src={picUrl} alt="" className={classes.pic} style={{maxWidth: matches?"400px":"200px", maxHeight:  matches?"400px":"200px", marginBottom: "20px"}}/>
                   
                     <input
                       type="file"
@@ -863,7 +866,7 @@ function ComplexGrid() {
                 <Grid
                   container
                   direction="row"
-                  justify="flex-start"
+                  justify="space-evenly"
                   alignItems="center"
                 >
                   <TextField

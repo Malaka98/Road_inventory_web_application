@@ -6,7 +6,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 import DeleteIcon from "@material-ui/icons/Delete";
-import UpdateIcon from "@material-ui/icons/Update";
+import EditIcon from '@material-ui/icons/Edit';
 
 import Button from "@material-ui/core/Button";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -14,6 +14,7 @@ import axios from "axios";
 
 import { useHistory } from "react-router-dom";
 import SearchBox from '../SeachBox'
+import DialogBox from './DialogBox'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,11 +26,17 @@ function ViewDoc() {
   const classes = useStyles();
   const [received, setreceived] = useState(true);
   const [data, setData] = useState([{}]);
-  //var data = [{}]
+  const [isDelete, setisDelete] = useState(false)
+
+  const [handleClickOpen, sethandleClickOpen] = useState(false)
+  const [id, setid] = useState([])
 
   useEffect(() => {
     genarate();
-  }, []);
+    console.log("update");
+  }, [isDelete]);
+
+
 
   function genarate() {
     axios({
@@ -39,11 +46,12 @@ function ViewDoc() {
     })
       .then(function(response) {
         //handle success
-        //console.log(response.data);
+        console.log(response.data);
 
         setData(response.data);
         //console.log(data);
         setreceived(false);
+        setisDelete(false)
       })
       .catch(function(response) {
         //handle error
@@ -56,8 +64,31 @@ function ViewDoc() {
     history.push("/fulldetails?id=" + data);
   }
   const history = useHistory();
+
+  function deleteDoc(data) {
+    const formdata = new FormData();
+    formdata.append("id", data);
+    axios({
+      method: "post",
+      url: "http://localhost:4000/deletedoc",
+      data: formdata,
+      withCredentials: true,
+    })
+      .then(function(response) {
+        //handle success
+        console.log(response);
+        setisDelete(true)
+      })
+      .catch(function(response) {
+        //handle error
+        console.log(response);
+      });
+  }
   return (
     <div>
+
+        { handleClickOpen ? <DialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)}}/> : ""}
+
            <Grid
             container
             direction="row"
@@ -79,7 +110,7 @@ function ViewDoc() {
               <ListItemText primary="Loading" />
             </ListItem>
           ) : (
-            
+            data !='' ?
             data.map((item, index) => {
               return (
                 <ListItem
@@ -105,22 +136,24 @@ function ViewDoc() {
                     >
                       <Button
                         onClick={() => {
-                          console.log("Update");
+                          sethandleClickOpen(true)
+                          setid(item)
+                          
                         }}
                       >
-                        <UpdateIcon
+                        <EditIcon
                           style={{ fontSize: 30, marginRight: "10px" }}
                         />
                       </Button>
 
                       <Button
                         onClick={() => {
-                          console.log("Delete");
+                          deleteDoc(item.ID)
                         }}
                       >
                         <DeleteIcon
                           style={{
-                            color: "#fc030b",
+                            color: "#B4423C",
                             fontSize: 30,
                             marginLeft: "10px",
                           }}
@@ -130,7 +163,7 @@ function ViewDoc() {
                   </ListItemSecondaryAction>
                 </ListItem>
               );
-            }) 
+            }) : <div>Not data found</div>
             
           )}
            

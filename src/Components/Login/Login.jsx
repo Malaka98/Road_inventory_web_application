@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useFormik } from 'formik';
 import { useHistory} from "react-router-dom"
@@ -28,7 +28,39 @@ const validate = values => {
 export default function Login() {
 
     const history = useHistory()
+    //const [isLoading, setisLoading] = useState(true)
 
+    useEffect(() => {
+        
+        axios({
+            method: 'POST',
+            url: 'http://localhost:4000/check',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            withCredentials: true,
+          
+          }).then((response)=>{
+            
+            if(typeof(response.data.uinfo)!='undefined') {
+              
+              if(response.data.auth === "login") {
+               
+                //setisLoading(false)
+                history.push('/dashboard')
+                
+              }
+              
+            }else if(response.data === 'Unauthorized Request') {
+            //   setisLoading(true)
+                console.log(response.data);
+            }
+            
+          }).catch((response)=>{
+            console.log(response);
+          })
+        
+    }, [])
     
 
     const formik = useFormik({

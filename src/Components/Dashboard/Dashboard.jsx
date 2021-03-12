@@ -7,12 +7,11 @@ import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
+import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
-    backgroundColor: "#6200ea",
+    backgroundColor: "#4461C1",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -72,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     height: "100vh",
     overflow: "auto",
-    backgroundColor: "#6200ea",
+    backgroundColor: "#4461C1",
   },
   divider: {
     padding: "10px",
@@ -102,7 +101,7 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {["Create New Document", "Search", "Send email", "Drafts"].map(
+        {/* {["Create New Document", "Search"].map(
           (text, index) => (
             <ListItem
               button
@@ -116,9 +115,21 @@ function ResponsiveDrawer(props) {
               <ListItemText primary={text} />
             </ListItem>
           )
-        )}
+        )} */}
+        <ListItem
+              button
+              key={"Create New Document"}
+              component={Link}
+              to={"/createnewdocument"}
+            >
+              <ListItemIcon>
+                <CreateNewFolderIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Create New Document"} />
+            </ListItem>
+            <Divider />
       </List>
-      <Divider />
+      {/* <Divider />
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem button key={text}>
@@ -128,7 +139,7 @@ function ResponsiveDrawer(props) {
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </div>
   );
 

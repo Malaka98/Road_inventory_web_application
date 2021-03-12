@@ -15,7 +15,9 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
-
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import axios from "axios";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -82,8 +84,8 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(col1, col2, col3) {
-  return { col1, col2, col3 };
+function createData(col1, col2, col3, delete_col) {
+  return { col1, col2, col3, delete_col };
 }
 
 
@@ -104,13 +106,12 @@ const useStyles2 = makeStyles({
 export default function CustomPaginationActionsTable(props) {
 
   
-
   const rows = 
     props.row.map((data, index) => {
-      return createData(data.T2data3, data.T2data2, data.T2data1)
+      return createData(data.T2data3, data.T2data2, data.T2data1, data.t2_id)
     })
     
-  console.log(rows);
+  //console.log(rows);
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -125,6 +126,26 @@ export default function CustomPaginationActionsTable(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  function deleteDoc(id) {
+    const formdata = new FormData();
+    formdata.append("id", id);
+    axios({
+      method: "post",
+      url: "http://localhost:4000/deletetable2",
+      data: formdata,
+      withCredentials: true,
+    })
+      .then(function(response) {
+        //handle success
+        console.log(response);
+        props.onDelete(response);
+      })
+      .catch(function(response) {
+        //handle error
+        console.log(response);
+      });
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -151,6 +172,27 @@ export default function CustomPaginationActionsTable(props) {
               <TableCell align="center">
                 {row.col3}
               </TableCell>
+              {row.delete_col ? (
+                  <>
+                    <TableCell style={{ width: 20 }} align="center">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          deleteDoc(row.delete_col);
+                        }}
+                      >
+                        <DeleteIcon style={{ color: "#fc0303" }} />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell style={{ width: 20 }} align="center">
+                      <IconButton aria-label="delete" >
+                        <EditIcon style={{ color: "#34989D" }} />
+                      </IconButton>
+                    </TableCell>
+                  </>
+                ) : (
+                  <td></td>
+                )}
             </TableRow>
           ))}
 

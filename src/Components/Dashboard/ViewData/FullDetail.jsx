@@ -6,7 +6,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ import { useLocation } from "react-router";
 import Table1 from "../Table/Table1";
 import Table2 from "../Table/Table2";
 import Button from "@material-ui/core/Button";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,11 +41,15 @@ const useStyles = makeStyles((theme) => ({
   },
   h6: {
     margin: "20px",
-  }
+  },
 }));
 
 function ViewDoc() {
+
   const [Tdata, setTdata] = useState([{}]);
+  const [T1data, setT1data] = useState([{}]);
+  const [T2data, setT2data] = useState([{}]);
+  const [load, setload] = useState(false)
 
   const classes = useStyles();
 
@@ -54,35 +58,80 @@ function ViewDoc() {
   }
 
   let query = useQuery();
-  console.log(query.get("id"));
+  //console.log(query.get("id"));
+
 
   useEffect(() => {
     genarate();
   }, []);
 
-  function genarate() {
-    const formdata = new FormData();
-    formdata.append("id", query.get("id"));
-    axios({
-      method: "post",
-      url: "http://localhost:4000/getfulldetail",
-      data: formdata,
-      withCredentials: true,
-    })
-      .then(function(response) {
-        //handle success
-        //console.log(response.data);
-        setTdata(response.data);
+  // function genarate() {
+  //   const formdata = new FormData();
+  //   formdata.append("id", query.get("id"));
+  //   axios({
+  //     method: "post",
+  //     url: "http://localhost:4000/getfulldetail",
+  //     data: formdata,
+  //     withCredentials: true,
+  //   })
+  //     .then(function(response) {
+  //       //handle success
+  //       //console.log(response.data);
 
-        //console.log(data);
-      })
-      .catch(function(response) {
-        //handle error
-        console.log(response);
-      });
+  //       setTdata(response.data.document);
+
+  //       if (response.data.table1.length) {
+  //         setT1data(response.data.table1);
+  //       } else {
+  //         setT1data([{}]);
+  //       }
+
+  //       if (response.data.table2.length) {
+  //         setT2data(response.data.table2);
+  //       } else {
+  //         setT2data([{}]);
+  //       }
+  //     })
+  //     .catch(function(response) {
+  //       //handle error
+  //       console.log(response);
+  //     });
+  // }
+
+
+  async function genarate() {
+    try {
+      const formdata = new FormData();
+      formdata.append("id", query.get("id"));
+      const response = await axios({
+          method: "post",
+          url: "http://localhost:4000/getfulldetail",
+          data: formdata,
+          withCredentials: true,
+        });
+      // console.log(response);
+
+      setTdata(response.data.document);
+
+        if (response.data.table1.length) {
+          setT1data(response.data.table1);
+        } else {
+          setT1data([{}]);
+        }
+
+        if (response.data.table2.length) {
+          setT2data(response.data.table2);
+        } else {
+          setT2data([{}]);
+        }
+        setload(true)
+    } catch (error) {
+      console.error(error);
+    }
   }
-  //console.log(Tdata);
-  const matches = useMediaQuery('(min-width:770px)');
+
+
+  const matches = useMediaQuery("(min-width:770px)");
   return (
     <div className={classes.root}>
       <Container maxWidth="xl" className={classes.con}>
@@ -122,13 +171,20 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         ගම/නගරය : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         {Tdata[0].data1}
                       </Typography>
-                      
                     </Grid>
 
                     <Grid
@@ -138,10 +194,18 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         මාර්ගයේ නම : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         {Tdata[0].data2}
                       </Typography>
                     </Grid>
@@ -153,11 +217,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         පටන් ගන්නා ස්ථානය : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {Tdata[0].data3}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {Tdata[0].data3}
                       </Typography>
                     </Grid>
 
@@ -168,11 +240,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         අවසන් වන ස්ථානය : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {Tdata[0].data4}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {Tdata[0].data4}
                       </Typography>
                     </Grid>
 
@@ -183,11 +263,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         ග්‍රාම නිලධාරී වසම : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {Tdata[0].data5}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {Tdata[0].data5}
                       </Typography>
                     </Grid>
 
@@ -198,11 +286,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         මන්ත්‍රී කොට්ටාසය : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {Tdata[0].data6}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {Tdata[0].data6}
                       </Typography>
                     </Grid>
 
@@ -213,11 +309,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         විදුලි කණු ගණන : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {Tdata[0].data7}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {Tdata[0].data7}
                       </Typography>
                     </Grid>
 
@@ -228,11 +332,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         විදුලි පහන් ගණන : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {Tdata[0].data8}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {Tdata[0].data8}
                       </Typography>
                     </Grid>
 
@@ -243,11 +355,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         ගැසට් කර ඇත්නම් ගැසට් පත්‍රයේ අංකය හා දිනය : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {`${Tdata[0].data10} - ${Tdata[0].data11}`}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {`${Tdata[0].data10} - ${Tdata[0].data11}`}
                       </Typography>
                     </Grid>
 
@@ -258,11 +378,19 @@ function ViewDoc() {
                       alignItems="center"
                       spacing={3}
                     >
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
                         නාම පුවරුවක් යොදා තිබේද? : -
                       </Typography>
-                      <Typography variant="h6" gutterBottom className={classes.h6}>
-                      {Tdata[0].data9}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        className={classes.h6}
+                      >
+                        {Tdata[0].data9}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -270,8 +398,16 @@ function ViewDoc() {
               </Grid>
               <Grid item xs={12} md={4}>
                 <Paper className={classes.paper}>
-                 
-                  <img src={require(`./uploads/${query.get("id")}`)} className={classes.pic} style={{maxWidth: matches?"520px":"200px", maxHeight:  matches?"520px":"200px", marginBottom: "20px"}}/>
+                  <img
+                    src={window.location.origin + `/uploads/${query.get("id")}`}
+                    className={classes.pic}
+                    style={{
+                      maxWidth: matches ? "520px" : "200px",
+                      maxHeight: matches ? "520px" : "200px",
+                      marginBottom: "20px",
+                    }}
+                    alt=""
+                  />
                 </Paper>
               </Grid>
             </Grid>
@@ -284,12 +420,21 @@ function ViewDoc() {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ marginBottom: "20px", backgroundColor: "#34989D" }}
+                style={{ marginBottom: "20px", backgroundColor: "#62C95E" }}
               >
                 ADD NEW
               </Button>
             </Grid>
-            <Table1 row={Tdata} />
+            
+            
+            {load ?   <Table1
+              row={T1data}
+              onDelete={(data) => {
+                genarate();
+              }}
+            /> : <div>Loading...</div> }
+            
+
             <Divider className={classes.divider} />
             <Grid
               container
@@ -300,12 +445,18 @@ function ViewDoc() {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ marginBottom: "20px", backgroundColor: "#34989D" }}
+                style={{ marginBottom: "20px", backgroundColor: "#62C95E" }}
               >
                 ADD NEW
               </Button>
             </Grid>
-            <Table2 row={Tdata} />
+
+            {load ? <Table2 row={T2data}
+                    onDelete={(data) => {
+                      genarate();
+                    }}
+            /> : <div>Loading...</div>}
+
             <Divider className={classes.divider} />
           </Paper>
         </Grid>

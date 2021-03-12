@@ -5,7 +5,6 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom"
 import Login from './Components/Login/Login'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Form from './Components/Dashboard/Form/CreateNewForm'
-import ViewDoc from './Components/Dashboard/ViewData/ViewDoc'
 import FullDetail from "./Components/Dashboard/ViewData/FullDetail";
 
 
@@ -19,10 +18,6 @@ export default function AppRoutes() {
         {
             path: '/createnewdocument',
             component: Form,
-        },
-        {
-            path: '/search',
-            component: ViewDoc,
         },
         {
             path: '/fulldetails',
