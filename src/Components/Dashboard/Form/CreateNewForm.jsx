@@ -67,7 +67,7 @@ function ComplexGrid() {
     
     if (!values.txt1) {
       errors.txt1 = "Required";
-    } else if (values.txt1.length > 15) {
+    } else if (values.txt1.length > 25) {
       errors.txt1 = "Must be 15 characters or less";
     }
 
@@ -90,7 +90,7 @@ function ComplexGrid() {
     }
     if (!values.txt5) {
       errors.txt5 = "Required";
-    } else if (values.txt5.length > 15) {
+    } else if (values.txt5.length > 25) {
       errors.txt5 = "Must be 15 characters or less";
     }
 
@@ -129,68 +129,68 @@ function ComplexGrid() {
 
     if (!values.txt9) {
       errors.txt9 = "Required";
-    } else if (values.txt9.length > 15) {
-      errors.txt9 = "Must be 15 characters or less";
+    } else if (values.txt9.length > 20) {
+      errors.txt9 = "Must be 20 characters or less";
     }
 
     if (!values.txt10) {
       errors.txt10 = "Required";
-    } else if (values.txt10.length > 15) {
-      errors.txt10 = "Must be 15 characters or less";
+    } else if (values.txt10.length > 20) {
+      errors.txt10 = "Must be 20 characters or less";
     }
 
     if (!values.txt11) {
       errors.txt11 = "Required";
-    } else if (values.txt11.length > 15) {
-      errors.txt11 = "Must be 15 characters or less";
+    } else if (values.txt11.length > 20) {
+      errors.txt11 = "Must be 20 characters or less";
     }
 
     if (!values.txt12) {
       errors.txt12 = "Required";
-    } else if (values.txt12.length > 15) {
-      errors.txt12 = "Must be 15 characters or less";
+    } else if (values.txt12.length > 20) {
+      errors.txt12 = "Must be 20 characters or less";
     }
 
     if (!values.txt13) {
       errors.txt13 = "Required";
-    } else if (values.txt13.length > 15) {
-      errors.txt13 = "Must be 15 characters or less";
+    } else if (values.txt13.length > 20) {
+      errors.txt13 = "Must be 20 characters or less";
     }
 
     if (!values.txt14) {
       errors.txt14 = "Required";
-    } else if (values.txt14.length > 15) {
-      errors.txt14 = "Must be 15 characters or less";
+    } else if (values.txt14.length > 20) {
+      errors.txt14 = "Must be 20 characters or less";
     }
 
     if (!values.txt15) {
       errors.txt15 = "Required";
-    } else if (values.txt15.length > 15) {
-      errors.txt15 = "Must be 15 characters or less";
+    } else if (values.txt15.length > 20) {
+      errors.txt15 = "Must be 20 characters or less";
     }
 
     if (!values.txt16) {
       errors.txt16 = "Required";
-    } else if (values.txt16.length > 15) {
-      errors.txt16 = "Must be 15 characters or less";
+    } else if (values.txt16.length > 20) {
+      errors.txt16 = "Must be 20 characters or less";
     }
 
     if (!values.txt17) {
       errors.txt17 = "Required";
-    } else if (values.txt17.length > 15) {
-      errors.txt17 = "Must be 15 characters or less";
+    } else if (values.txt17.length > 20) {
+      errors.txt17 = "Must be 20 characters or less";
     }
 
     if (!values.txt18) {
       errors.txt18 = "Required";
-    } else if (values.txt18.length > 15) {
-      errors.txt18 = "Must be 15 characters or less";
+    } else if (values.txt18.length > 20) {
+      errors.txt18 = "Must be 20 characters or less";
     }
 
     if (!values.txt19) {
       errors.txt19 = "Required";
-    } else if (values.txt19.length > 15) {
-      errors.txt19 = "Must be 15 characters or less";
+    } else if (values.txt19.length > 20) {
+      errors.txt19 = "Must be 20 characters or less";
     }
 
     if (!values.date) {
@@ -199,14 +199,14 @@ function ComplexGrid() {
 
     if (!values.txt20) {
       errors.txt20 = "Required";
-    } else if (values.txt20.length > 15) {
-      errors.txt20 = "Must be 15 characters or less";
+    } else if (values.txt20.length > 100) {
+      errors.txt20 = "Must be 100 characters or less";
     }
 
     if (!values.txt21) {
       errors.txt21 = "Required";
-    } else if (values.txt21.length > 15) {
-      errors.txt21 = "Must be 15 characters or less";
+    } else if (values.txt21.length > 20) {
+      errors.txt21 = "Must be 20 characters or less";
     }
 
     return errors;

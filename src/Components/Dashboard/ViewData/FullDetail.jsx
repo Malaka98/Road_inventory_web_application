@@ -16,6 +16,8 @@ import Table1 from "../Table/Table1";
 import Table2 from "../Table/Table2";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import AddNewDialogBox from './AddNewDialogBox';
+import AddNewDialogBox2 from './AddNewDialogBox2';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +53,12 @@ function ViewDoc() {
   const [T2data, setT2data] = useState([{}]);
   const [load, setload] = useState(false)
 
+  const [handleClickOpen, sethandleClickOpen] = useState(false)
+  const [id, setid] = useState()
+
+  const [handleClickOpen2, sethandleClickOpen2] = useState(false)
+  const [id2, setid2] = useState()
+
   const classes = useStyles();
 
   function useQuery() {
@@ -64,40 +72,6 @@ function ViewDoc() {
   useEffect(() => {
     genarate();
   }, []);
-
-  // function genarate() {
-  //   const formdata = new FormData();
-  //   formdata.append("id", query.get("id"));
-  //   axios({
-  //     method: "post",
-  //     url: "http://localhost:4000/getfulldetail",
-  //     data: formdata,
-  //     withCredentials: true,
-  //   })
-  //     .then(function(response) {
-  //       //handle success
-  //       //console.log(response.data);
-
-  //       setTdata(response.data.document);
-
-  //       if (response.data.table1.length) {
-  //         setT1data(response.data.table1);
-  //       } else {
-  //         setT1data([{}]);
-  //       }
-
-  //       if (response.data.table2.length) {
-  //         setT2data(response.data.table2);
-  //       } else {
-  //         setT2data([{}]);
-  //       }
-  //     })
-  //     .catch(function(response) {
-  //       //handle error
-  //       console.log(response);
-  //     });
-  // }
-
 
   async function genarate() {
     try {
@@ -133,7 +107,12 @@ function ViewDoc() {
 
   const matches = useMediaQuery("(min-width:770px)");
   return (
+
     <div className={classes.root}>
+
+{ handleClickOpen ? <AddNewDialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)}} callBack2={() => {genarate()}}/> : ""}
+{ handleClickOpen2 ? <AddNewDialogBox2 handleOpen={handleClickOpen2} id={id2} callBack={(data) => {sethandleClickOpen2(data)}} callBack2={() => {genarate()}}/> : ""}
+      
       <Container maxWidth="xl" className={classes.con}>
         <Typography
           variant="h4"
@@ -421,6 +400,10 @@ function ViewDoc() {
                 variant="contained"
                 color="primary"
                 style={{ marginBottom: "20px", backgroundColor: "#62C95E" }}
+                onClick={()=>{
+                  sethandleClickOpen(true);
+                  setid(query.get("id"));
+                }}
               >
                 ADD NEW
               </Button>
@@ -446,6 +429,10 @@ function ViewDoc() {
                 variant="contained"
                 color="primary"
                 style={{ marginBottom: "20px", backgroundColor: "#62C95E" }}
+                onClick={()=>{
+                  sethandleClickOpen2(true);
+                  setid2(query.get("id"));
+                }}
               >
                 ADD NEW
               </Button>

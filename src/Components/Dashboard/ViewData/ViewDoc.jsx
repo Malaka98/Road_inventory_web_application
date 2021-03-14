@@ -84,10 +84,11 @@ function ViewDoc() {
         console.log(response);
       });
   }
+  
   return (
     <div>
 
-        { handleClickOpen ? <DialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)}}/> : ""}
+        { handleClickOpen ? <DialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)}} callBack2={()=>{genarate()}} /> : ""}
 
            <Grid
             container

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -18,6 +18,7 @@ import TableHead from '@material-ui/core/TableHead';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import axios from "axios";
+import DialogBox2 from './DialogBox2'
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -105,7 +106,9 @@ const useStyles2 = makeStyles({
 
 export default function CustomPaginationActionsTable(props) {
 
-  
+  const [handleClickOpen, sethandleClickOpen] = useState(false)
+  const [id, setid] = useState({})
+
   const rows = 
     props.row.map((data, index) => {
       return createData(data.T2data3, data.T2data2, data.T2data1, data.t2_id)
@@ -148,6 +151,11 @@ export default function CustomPaginationActionsTable(props) {
   }
 
   return (
+    <div>
+        {/* **************************************************Dialog Box********************************************************* */}
+        { handleClickOpen ? <DialogBox2 handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data); props.onDelete(data);}} /> : ""}
+        {/* ******************************************************************************************************************************************** */}
+
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="custom pagination table">
         <TableHead className={classes.th}>
@@ -167,10 +175,10 @@ export default function CustomPaginationActionsTable(props) {
                 {row.col1}
               </TableCell>
               <TableCell align="center">
-                {row.col2}
+                {row.col3}
               </TableCell>
               <TableCell align="center">
-                {row.col3}
+                {row.col2}
               </TableCell>
               {row.delete_col ? (
                   <>
@@ -185,7 +193,10 @@ export default function CustomPaginationActionsTable(props) {
                       </IconButton>
                     </TableCell>
                     <TableCell style={{ width: 20 }} align="center">
-                      <IconButton aria-label="delete" >
+                      <IconButton aria-label="delete" onClick={()=>{
+                        sethandleClickOpen(true);
+                        setid(row);
+                      }}>
                         <EditIcon style={{ color: "#34989D" }} />
                       </IconButton>
                     </TableCell>
@@ -222,5 +233,6 @@ export default function CustomPaginationActionsTable(props) {
         </TableFooter>
       </Table>
     </TableContainer>
+    </div>
   );
 }

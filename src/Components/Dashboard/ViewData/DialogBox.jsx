@@ -12,7 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
-
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
 
   paper: {
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DialogBox(props) {
+  //console.log(props.id);
   const classes = useStyles();
   const [open, setOpen] = useState(props.handleOpen);
 
@@ -107,20 +108,39 @@ export default function DialogBox(props) {
     },
     validate,
     onSubmit: (values) => {
-
+      console.log(values);
       const formdata = new FormData();
 
-      formdata.append("txt1", values.txt1);
-      formdata.append("txt2", values.txt2);
-      formdata.append("txt3", values.txt3);
-      formdata.append("txt4", values.txt4);
-      formdata.append("txt5", values.txt5);
-      formdata.append("txt6", values.txt6);
-      formdata.append("txt7", values.txt7);
-      formdata.append("txt8", values.txt8);
-      formdata.append("txt9", values.select);
-      formdata.append("txt10", values.otxt1);
-      formdata.append("txt11", values.otxt2);
+      formdata.append("data1", values.txt1);
+      formdata.append("data2", values.txt2);
+      formdata.append("data3", values.txt3);
+      formdata.append("data4", values.txt4);
+      formdata.append("data5", values.txt5);
+      formdata.append("data6", values.txt6);
+      formdata.append("data7", values.txt7);
+      formdata.append("data8", values.txt8);
+      formdata.append("data9", values.select);
+      formdata.append("data10", values.otxt1);
+      formdata.append("data11", values.otxt2);
+      formdata.append("ID", props.id.ID);
+
+      axios({
+        method: "post",
+        url: "http://localhost:4000/updatedocument",
+        data: formdata,
+        withCredentials: true,
+      })
+        .then(function (response) {
+          //handle success
+          console.log(response);
+          setOpen(false);
+          props.callBack(false);
+          props.callBack2();
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
       
     },
   });
@@ -135,11 +155,10 @@ export default function DialogBox(props) {
       maxWidth={"xl"}
     >
       <form onSubmit={formik.handleSubmit}>
-        <DialogTitle id="form-dialog-title">Enter Data</DialogTitle>
+        <DialogTitle id="form-dialog-title">Update Document</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
+            Add a new data to update
           </DialogContentText>
 
           <Grid>
@@ -412,7 +431,7 @@ export default function DialogBox(props) {
             Cancel
           </Button>
           <Button type="submit" color="primary">
-            Insert
+            Update
           </Button>
         </DialogActions>
       </form>

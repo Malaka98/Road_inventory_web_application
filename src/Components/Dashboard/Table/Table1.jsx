@@ -205,7 +205,9 @@ export default function CustomPaginationActionsTable(props) {
   return (
     <div>
       {/* **************************************************Dialog Box********************************************************* */}
-      { handleClickOpen ? <DialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)}}/> : ""}
+      { handleClickOpen ? <DialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)
+      props.onDelete(data);
+      }}/> : ""}
       {/* ******************************************************************************************************************************************** */}
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
@@ -300,7 +302,7 @@ export default function CustomPaginationActionsTable(props) {
                       <IconButton aria-label="delete" onClick={()=>{
                         sethandleClickOpen(true);
                         setid(row);
-                        console.log(row);
+                        //console.log(row);
                       }}>
                         <EditIcon style={{ color: "#34989D" }} />
                       </IconButton>
