@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -13,46 +13,42 @@ import axios from "axios";
 import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles((theme) => ({
-
-    paper: {
-      padding: "20px",
-    },
-    textField: {
-      margin: "20px",
-    },
-  }));
+  textField: {
+    margin: "20px",
+  },
+}));
 
 export default function AddNewDialogBox2(props) {
-    console.log(props.id);
-    const classes = useStyles();
-    const [open, setOpen] = useState(props.handleOpen);
-  
-    const handleClose = () => {
-      setOpen(false);
-      props.callBack(false);
-    };
+  console.log(props.id);
+  const classes = useStyles();
+  const [open, setOpen] = useState(props.handleOpen);
 
-    const validate = (values) => {
-        const errors = {};
+  const handleClose = () => {
+    setOpen(false);
+    props.callBack(false);
+  };
 
-        if (!values.date) {
-          errors.date = "Required";
-        }
-    
-        if (!values.txt20) {
-          errors.txt20 = "Required";
-        } else if (values.txt20.length > 15) {
-          errors.txt20 = "Must be 15 characters or less";
-        }
-    
-        if (!values.txt21) {
-          errors.txt21 = "Required";
-        } else if (values.txt21.length > 15) {
-          errors.txt21 = "Must be 15 characters or less";
-        }
-    
-        return errors;
-      };
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.date) {
+      errors.date = "Required";
+    }
+
+    if (!values.txt20) {
+      errors.txt20 = "Required";
+    } else if (values.txt20.length > 15) {
+      errors.txt20 = "Must be 15 characters or less";
+    }
+
+    if (!values.txt21) {
+      errors.txt21 = "Required";
+    } else if (values.txt21.length > 15) {
+      errors.txt21 = "Must be 15 characters or less";
+    }
+
+    return errors;
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -62,14 +58,13 @@ export default function AddNewDialogBox2(props) {
     },
     validate,
     onSubmit: (values) => {
-      
       const formdata = new FormData();
 
       formdata.append("T2data1", values.txt20);
       formdata.append("T2data2", values.txt21);
       formdata.append("T2data3", values.date);
       formdata.append("d_id", props.id);
-      
+
       axios({
         method: "post",
         url: "http://localhost:4000/addnewrecode2",
@@ -87,12 +82,11 @@ export default function AddNewDialogBox2(props) {
           //handle error
           console.log(response);
         });
-      
     },
   });
 
-    return (
-        <Dialog
+  return (
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -104,99 +98,99 @@ export default function AddNewDialogBox2(props) {
           <DialogTitle id="form-dialog-title">Enter Data</DialogTitle>
           <DialogContent>
             <DialogContentText>
-            Enter new data for a new record
+              Enter new data for a new record
             </DialogContentText>
-
+            <Grid style={{ width: "800px" }}>
             <Grid>
-            <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <InputLabel id="demo-simple-select-label">
-                    ගැසට් පත්‍රයේ දිනය
-                  </InputLabel>
-                  <TextField
-                    id="date"
-                    type="date"
-                    name="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.date}
-                    error={
-                      formik.touched.date && formik.errors.date ? true : false
-                    }
-                    helperText={
-                      formik.touched.date && formik.errors.date
-                        ? formik.errors.date
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <TextField
-                    id="outlined-margin-dense"
-                    label="සවිකළ උපකරණ / සිදු කල අලුත්වැඩියාව / කරණ ලද වැඩි දියුණු කිරීම / ප්‍රතිසංස්කරණය"
-                    className={classes.textField}
-                    margin="dense"
-                    variant="outlined"
-                    size="small"
-                    name="txt20"
-                    fullWidth
-                    multiline
-                    rows={3}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.txt20}
-                    error={
-                      formik.touched.txt20 && formik.errors.txt20 ? true : false
-                    }
-                    helperText={
-                      formik.touched.txt20 && formik.errors.txt20
-                        ? formik.errors.txt20
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <TextField
-                    id="outlined-margin-dense"
-                    label="වියදම"
-                    className={classes.textField}
-                    margin="dense"
-                    variant="outlined"
-                    size="small"
-                    name="txt21"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.txt21}
-                    error={
-                      formik.touched.txt21 && formik.errors.txt21 ? true : false
-                    }
-                    helperText={
-                      formik.touched.txt21 && formik.errors.txt21
-                        ? formik.errors.txt21
-                        : null
-                    }
-                  />
-                </Grid>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+              >
+                <InputLabel id="demo-simple-select-label">
+                  ගැසට් පත්‍රයේ දිනය
+                </InputLabel>
+                <TextField
+                  id="date"
+                  type="date"
+                  name="date"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.date}
+                  error={
+                    formik.touched.date && formik.errors.date ? true : false
+                  }
+                  helperText={
+                    formik.touched.date && formik.errors.date
+                      ? formik.errors.date
+                      : null
+                  }
+                />
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+              >
+                <TextField
+                  id="outlined-margin-dense"
+                  label="සවිකළ උපකරණ / සිදු කල අලුත්වැඩියාව / කරණ ලද වැඩි දියුණු කිරීම / ප්‍රතිසංස්කරණය"
+                  className={classes.textField}
+                  margin="dense"
+                  variant="outlined"
+                  size="small"
+                  name="txt20"
+                  fullWidth
+                  multiline
+                  rows={3}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.txt20}
+                  error={
+                    formik.touched.txt20 && formik.errors.txt20 ? true : false
+                  }
+                  helperText={
+                    formik.touched.txt20 && formik.errors.txt20
+                      ? formik.errors.txt20
+                      : null
+                  }
+                />
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+              >
+                <TextField
+                  id="outlined-margin-dense"
+                  label="වියදම"
+                  className={classes.textField}
+                  margin="dense"
+                  variant="outlined"
+                  size="small"
+                  name="txt21"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.txt21}
+                  error={
+                    formik.touched.txt21 && formik.errors.txt21 ? true : false
+                  }
+                  helperText={
+                    formik.touched.txt21 && formik.errors.txt21
+                      ? formik.errors.txt21
+                      : null
+                  }
+                />
+              </Grid>
             </Grid>
-            
+            </Grid>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
@@ -209,5 +203,5 @@ export default function AddNewDialogBox2(props) {
           </DialogActions>
         </form>
       </Dialog>
-    )
+  );
 }

@@ -115,7 +115,10 @@ function ImageUpload() {
     if (fileInput.current.files.length === 0) {
       errors.file = "Please insert Image";
     } else if (fileInput.current.files[0].type !== "image/png") {
-      errors.file = "not valid";
+      if(fileInput.current.files[0].type !== "image/jpeg"){
+        errors.file = "not valid";
+      }
+      // console.log(fileInput.current.files[0].type);
       console.log(fileInput.current);
     } else if (fileInput.current.files[0].size > 3000000) {
       errors.file = "full";
