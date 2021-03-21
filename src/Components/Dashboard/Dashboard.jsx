@@ -11,11 +11,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Badge from '@material-ui/core/Badge';
 
 import { Link } from "react-router-dom";
 
@@ -84,6 +85,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     "font-weight": "bold",
   },
+  logo: {
+    margin: "20px",
+  },
+  logotxt: {
+    fontWeight: "bold",
+  }
 }));
 
 function ResponsiveDrawer(props) {
@@ -98,7 +105,11 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div >
+        <Badge color="secondary" variant="dot" className={classes.logo}>
+          <Typography variant="h6" className={classes.logotxt}>Admin Dashboard</Typography>
+        </Badge>
+      </div>
       <Divider />
       <List>
         {/* {["Create New Document", "Search"].map(
@@ -117,17 +128,17 @@ function ResponsiveDrawer(props) {
           )
         )} */}
         <ListItem
-              button
-              key={"Create New Document"}
-              component={Link}
-              to={"/createnewdocument"}
-            >
-              <ListItemIcon>
-                <CreateNewFolderIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Create New Document"} />
-            </ListItem>
-            <Divider />
+          button
+          key={"Create New Document"}
+          component={Link}
+          to={"/createnewdocument"}
+        >
+          <ListItemIcon>
+            <CreateNewFolderIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Create New Document"} />
+        </ListItem>
+        <Divider />
       </List>
       {/* <Divider />
       <List>
@@ -208,8 +219,6 @@ function ResponsiveDrawer(props) {
           justify="center"
           alignItems="stretch"
         >
-     
-
           <ViewDoc />
         </Grid>
       </main>
