@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography"; 
 import InputLabel from "@material-ui/core/InputLabel";
 import axios from "axios";
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     margin: "20px",
+    width: '300px',
   },
 }));
 
@@ -101,6 +103,7 @@ export default function DialogBox2(props) {
       disableEscapeKeyDown
       maxWidth="xl"
     >
+      <Container fixed>
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle id="form-dialog-title">Update Data</DialogTitle>
         <DialogContent>
@@ -155,7 +158,7 @@ export default function DialogBox2(props) {
                     variant="outlined"
                     size="small"
                     name="txt20"
-                    fullWidth
+                    
                     multiline
                     rows={3}
                     onChange={formik.handleChange}
@@ -212,6 +215,7 @@ export default function DialogBox2(props) {
           </Button>
         </DialogActions>
       </form>
+      </Container>
     </Dialog>
   );
 }

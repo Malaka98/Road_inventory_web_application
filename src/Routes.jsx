@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom"
 
@@ -45,7 +44,6 @@ export default function AppRoutes() {
 
 
 export function RoutWithSubRoutes(route) {
-    console.log(route);
     return (
         <div>
             <Route

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -6,6 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
+import { useRef } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBox(props) {
+function SearchBox(props) {
   const classes = useStyles();
-  const [searchName, setsearchName] = useState("")
+    const searchKey = useRef("")
 
   function genarate(value) {
     const formdata = new FormData();
@@ -56,6 +57,7 @@ export default function SearchBox(props) {
 
   return (
     <Paper className={classes.root}>
+      {console.log("Search Box")}
       <InputBase
         className={classes.input}
         placeholder="Search Google Maps"
@@ -66,7 +68,7 @@ export default function SearchBox(props) {
           }
         }}
         onChange={(e)=>{
-            setsearchName(e.target.value)
+            searchKey.current = e.target.value
         }}
       />
       <IconButton
@@ -75,7 +77,7 @@ export default function SearchBox(props) {
         aria-label="search"
         onClick={() => {
             
-              genarate(searchName);
+              genarate(searchKey.current);
             
           }}
       >
@@ -85,3 +87,5 @@ export default function SearchBox(props) {
     </Paper>
   );
 }
+
+export default React.memo(SearchBox);

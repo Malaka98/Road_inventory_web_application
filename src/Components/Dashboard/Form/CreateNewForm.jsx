@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import RouteGard from "../../../RouteGard";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -16,8 +16,6 @@ import {
 import { useFormik } from "formik";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
-import pic from './empty.png'
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import { useHistory} from "react-router-dom"
 
@@ -25,8 +23,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "#4461C1",
-    height: "100%",
+    height: "100vh",
     padding: "20px",
+    overflow: "auto",
 
   },
   con: {
@@ -55,163 +54,142 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
+
 function ComplexGrid() {
   const classes = useStyles();
-  const fileInput = useRef(null);
+
   const history = useHistory()
-  const [picUrl, setpicUrl] = useState(pic)
-  
+
 
   const validate = (values) => {
+    
     const errors = {};
     
     if (!values.txt1) {
       errors.txt1 = "Required";
-    } else if (values.txt1.length > 25) {
-      errors.txt1 = "Must be 15 characters or less";
+    } else if (values.txt1.length > 100) {
+      errors.txt1 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt2) {
       errors.txt2 = "Required";
-    } else if (values.txt2.length > 20) {
-      errors.txt2 = "Must be 20 characters or less";
+    } else if (values.txt2.length > 100) {
+      errors.txt2 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt3) {
       errors.txt3 = "Required";
-    } else if (values.txt3.length > 20) {
-      errors.txt3 = "Must be 20 characters or less";
+    } else if (values.txt3.length > 100) {
+      errors.txt3 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt4) {
       errors.txt4 = "Required";
-    } else if (values.txt4.length > 20) {
-      errors.txt4 = "Must be 20 characters or less";
+    } else if (values.txt4.length > 100) {
+      errors.txt4 = "Must be 100 characters or less";
     }
     if (!values.txt5) {
       errors.txt5 = "Required";
-    } else if (values.txt5.length > 25) {
-      errors.txt5 = "Must be 15 characters or less";
+    } else if (values.txt5.length > 100) {
+      errors.txt5 = "Must be 10 characters or less";
     }
-
+  
     if (!values.txt6) {
       errors.txt6 = "Required";
-    } else if (values.txt6.length > 20) {
-      errors.txt6 = "Must be 20 characters or less";
+    } else if (values.txt6.length > 100) {
+      errors.txt6 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt7) {
       errors.txt7 = "Required";
-    } else if (values.txt7.length > 20) {
-      errors.txt7 = "Must be 20 characters or less";
+    } else if (values.txt7.length > 100) {
+      errors.txt7 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt8) {
       errors.txt8 = "Required";
-    } else if (values.txt8.length > 20) {
-      errors.txt8 = "Must be 20 characters or less";
+    } else if (values.txt8.length > 100) {
+      errors.txt8 = "Must be 100 characters or less";
     }
-
+  
     if (!values.select) {
       errors.select = "Required";
-    } else if (values.select.length > 20) {
-      errors.select = "Must be 20 characters or less";
+    } else if (values.select.length > 100) {
+      errors.select = "Must be 100 characters or less";
     }
+  
 
-    if (fileInput.current.files.length === 0) {
-      errors.file = "Please insert Image";
-    } else if (fileInput.current.files[0].type !== "image/png") {
-      errors.file = "not valid";
-      console.log(fileInput.current);
-    } else if (fileInput.current.files[0].size > 3000000) {
-      errors.file = "full";
-    }
-
+  
     if (!values.txt9) {
       errors.txt9 = "Required";
-    } else if (values.txt9.length > 20) {
-      errors.txt9 = "Must be 20 characters or less";
+    } else if (values.txt9.length > 100) {
+      errors.txt9 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt10) {
       errors.txt10 = "Required";
-    } else if (values.txt10.length > 20) {
-      errors.txt10 = "Must be 20 characters or less";
+    } else if (values.txt10.length > 100) {
+      errors.txt10 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt11) {
       errors.txt11 = "Required";
-    } else if (values.txt11.length > 20) {
-      errors.txt11 = "Must be 20 characters or less";
+    } else if (values.txt11.length > 100) {
+      errors.txt11 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt12) {
       errors.txt12 = "Required";
-    } else if (values.txt12.length > 20) {
-      errors.txt12 = "Must be 20 characters or less";
+    } else if (values.txt12.length > 100) {
+      errors.txt12 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt13) {
       errors.txt13 = "Required";
-    } else if (values.txt13.length > 20) {
-      errors.txt13 = "Must be 20 characters or less";
+    } else if (values.txt13.length > 100) {
+      errors.txt13 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt14) {
       errors.txt14 = "Required";
-    } else if (values.txt14.length > 20) {
-      errors.txt14 = "Must be 20 characters or less";
+    } else if (values.txt14.length > 100) {
+      errors.txt14 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt15) {
       errors.txt15 = "Required";
-    } else if (values.txt15.length > 20) {
-      errors.txt15 = "Must be 20 characters or less";
+    } else if (values.txt15.length > 100) {
+      errors.txt15 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt16) {
       errors.txt16 = "Required";
-    } else if (values.txt16.length > 20) {
-      errors.txt16 = "Must be 20 characters or less";
+    } else if (values.txt16.length > 100) {
+      errors.txt16 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt17) {
       errors.txt17 = "Required";
-    } else if (values.txt17.length > 20) {
-      errors.txt17 = "Must be 20 characters or less";
+    } else if (values.txt17.length > 100) {
+      errors.txt17 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt18) {
       errors.txt18 = "Required";
-    } else if (values.txt18.length > 20) {
-      errors.txt18 = "Must be 20 characters or less";
+    } else if (values.txt18.length > 100) {
+      errors.txt18 = "Must be 100 characters or less";
     }
-
+  
     if (!values.txt19) {
       errors.txt19 = "Required";
-    } else if (values.txt19.length > 20) {
-      errors.txt19 = "Must be 20 characters or less";
-    }
-
-    if (!values.date) {
-      errors.date = "Required";
-    }
-
-    if (!values.txt20) {
-      errors.txt20 = "Required";
-    } else if (values.txt20.length > 100) {
-      errors.txt20 = "Must be 100 characters or less";
-    }
-
-    if (!values.txt21) {
-      errors.txt21 = "Required";
-    } else if (values.txt21.length > 20) {
-      errors.txt21 = "Must be 20 characters or less";
+    } else if (values.txt19.length > 100) {
+      errors.txt19 = "Must be 100 characters or less";
     }
 
     return errors;
   };
-
+  
   const formik = useFormik({
     initialValues: {
       txt1: "",
@@ -223,7 +201,6 @@ function ComplexGrid() {
       txt7: "",
       txt8: "",
       select: "",
-      file: "",
       otxt1: "",
       otxt2: "",
 
@@ -238,16 +215,12 @@ function ComplexGrid() {
       txt17: "",
       txt18: "",
       txt19: "",
-      date: "",
-      txt20: "",
-      txt21: "",
+
     },
     validate,
     onSubmit: (values) => {
-      //alert(JSON.stringify(values, null, 2));
-      //console.log(values)
       const formdata = new FormData();
-      formdata.append("img", fileInput.current.files[0]);
+      
       formdata.append("txt1", values.txt1);
       formdata.append("txt2", values.txt2);
       formdata.append("txt3", values.txt3);
@@ -256,6 +229,9 @@ function ComplexGrid() {
       formdata.append("txt6", values.txt6);
       formdata.append("txt7", values.txt7);
       formdata.append("txt8", values.txt8);
+      formdata.append("txt20", values.select);
+      formdata.append("txt21", values.otxt1);
+      formdata.append("txt22", values.otxt2);
       
       formdata.append("txt9", values.txt9);
       formdata.append("txt10", values.txt10);
@@ -269,27 +245,22 @@ function ComplexGrid() {
       formdata.append("txt18", values.txt18);
       formdata.append("txt19", values.txt19);
 
-      formdata.append("txt20", values.txt20);
-      formdata.append("txt21", values.txt21);
-      formdata.append("txt22", values.select);
-      formdata.append("txt23", values.date);
-      formdata.append("txt24", values.txt24);
-      formdata.append("txt25", values.otxt1);
-      formdata.append("txt26", values.otxt2);
 
       axios({
         method: "post",
-        url: "http://localhost:4000/upload",
+        url: "http://localhost:4000/newdocument",
         data: formdata,
-        headers: {
-          "content-type": "multipart/form-data",
-        },
+        // headers: {
+        //   'Access-Control-Allow-Origin' : '*',
+        //    'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        // },
         // onUploadProgress: (ProgressEvent) => {
         //   const { loaded, total } = ProgressEvent;
         //   let percent = Math.floor((loaded * 100) / total);
         //   setup(percent);
         //   console.log(`${loaded}kb of ${total} | ${percent}%`);
         // },
+        withCredentials: true,
       })
         .then(function (response) {
           //handle success
@@ -303,10 +274,11 @@ function ComplexGrid() {
       
     },
   });
-  const matches = useMediaQuery('(min-width:770px)');
+  
   return (
     <div className={classes.root}>
-      <Container maxWidth="xl" className={classes.con}>
+      
+      <Container maxWidth="md" className={classes.con}>
         <Typography
           variant="h4"
           gutterBottom
@@ -319,7 +291,7 @@ function ComplexGrid() {
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <Grid container spacing={3} className={classes.form}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <Paper className={classes.paper} elevation={10}>
                 <Grid
                   container
@@ -539,7 +511,6 @@ function ComplexGrid() {
                       id="date"
                       type="date"
                       name="otxt2"
-                      defaultValue="2017-05-24"
                       className={classes.textField}
                       InputLabelProps={{
                         shrink: true,
@@ -582,46 +553,10 @@ function ComplexGrid() {
                 </Grid>
               </Paper>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Paper className={classes.paper} elevation={10}>
-                <Grid
-                  container
-                  direction="column"
-                  justify="center"
-                  alignItems="center"
-                >
-                 <img src={picUrl} alt="" className={classes.pic} style={{maxWidth: matches?"400px":"200px", maxHeight:  matches?"400px":"200px", marginBottom: "20px"}}/>
-                  
-                    <input
-                      type="file"
-                      name="file"
-                      onChange={(e)=>{
-                        
-                        formik.handleChange(e)
-                        // setpicUrl(e.target.files[0])
-                        let reader = new FileReader();
-
-                        reader.onloadend = () => {
-                          setpicUrl(reader.result );
-                          console.log(reader.result )
-                        };
-                  
-                        reader.readAsDataURL(e.target.files[0]);
-                      
-                      }}
-                      onBlur={formik.handleBlur}
-                      ref={fileInput}
-                    />
-                    {formik.errors.file && formik.touched.file ? (
-                      <div style={{ color: "red" }}>{formik.errors.file}</div>
-                    ) : null}
-                </Grid>
-              </Paper>
-            </Grid>
 
             {/* ****************************************************************************************** */}
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <Paper className={classes.paper} elevation={10}>
                 <Grid
                   container
@@ -902,100 +837,7 @@ function ComplexGrid() {
                 </Grid>
               </Paper>
             </Grid>
-            {/* ************************************************************************************************ */}
-            <Grid item xs={12} sm={6}>
-              <Paper className={classes.paper} elevation={10}>
-                <Typography variant="h6">නඩත්තු සටහන්</Typography>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <InputLabel id="demo-simple-select-label">
-                    ගැසට් පත්‍රයේ දිනය
-                  </InputLabel>
-                  <TextField
-                    id="date"
-                    type="date"
-                    name="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.date}
-                    error={
-                      formik.touched.date && formik.errors.date ? true : false
-                    }
-                    helperText={
-                      formik.touched.date && formik.errors.date
-                        ? formik.errors.date
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <TextField
-                    id="outlined-margin-dense"
-                    label="සවිකළ උපකරණ / සිදු කල අලුත්වැඩියාව / කරණ ලද වැඩි දියුණු කිරීම / ප්‍රතිසංස්කරණය"
-                    className={classes.textField}
-                    margin="dense"
-                    variant="outlined"
-                    size="small"
-                    name="txt20"
-                    fullWidth
-                    multiline
-                    rows={3}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.txt20}
-                    error={
-                      formik.touched.txt20 && formik.errors.txt20 ? true : false
-                    }
-                    helperText={
-                      formik.touched.txt20 && formik.errors.txt20
-                        ? formik.errors.txt20
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  <TextField
-                    id="outlined-margin-dense"
-                    label="වියදම"
-                    className={classes.textField}
-                    margin="dense"
-                    variant="outlined"
-                    size="small"
-                    name="txt21"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.txt21}
-                    error={
-                      formik.touched.txt21 && formik.errors.txt21 ? true : false
-                    }
-                    helperText={
-                      formik.touched.txt21 && formik.errors.txt21
-                        ? formik.errors.txt21
-                        : null
-                    }
-                  />
-                </Grid>
-              </Paper>
-            </Grid>
-            {/* ************************************************************************************************** */}
+            
           </Grid>
         </form>
       </Container>

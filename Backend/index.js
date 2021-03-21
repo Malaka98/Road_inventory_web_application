@@ -5,12 +5,15 @@ const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const helmet = require("helmet");
 var CryptoJS = require("crypto-js");
+var fs = require('fs');
+// var router = express.Router();
 
 var cors = require("cors")
 const app = express()
 app.use(cookieParser())
 app.use(helmet());
 //app.use(cors())
+// app.use("/api", router);
 
 const corsOptions ={
   origin:'http://localhost:3000', 
@@ -19,7 +22,6 @@ const corsOptions ={
 }
 
 app.use(cors(corsOptions));
-
 
 app.listen(4000, () => {
   console.log("Server is up")
@@ -48,6 +50,7 @@ const gid = () => {
   return ((new Date()).getTime())
 }
 var id = null
+// var docid = null
 
 /*----------------------------//File upload//-------------------------------*/
 
@@ -66,54 +69,64 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("img");
 
 app.post("/upload", function (req, res) {
-  id = gid().toString()
+  id = gid().toString();
   upload(req, res, function (err) {
     if (err) return res.send("Error uploading file.");
-    
+    // docid = req.body["id"];
     let data = {
-      // name: req.body["name"],
-      // mail: req.body["email"],
-      ID: id,
-      data1: req.body["txt1"],
-      data2: req.body["txt2"],
-      data3: req.body["txt3"],
-      data4: req.body["txt4"],
-      data5: req.body["txt5"],
-      data6: req.body["txt6"],
-      data7: req.body["txt7"],
-      data8: req.body["txt8"],
-      data9: req.body["txt22"],
-      data10: req.body["txt25"],
-      data11: req.body["txt26"],
-    };
-
-    let data2 ={
-      T1data1: req.body["txt9"],
-      T1data2: req.body["txt10"],
-      T1data3: req.body["txt11"],
-      T1data4: req.body["txt12"],
-      T1data5: req.body["txt13"],
-      T1data6: req.body["txt14"],
-      T1data7: req.body["txt15"],
-      T1data8: req.body["txt16"],
-      T1data9: req.body["txt17"],
-      T1data10: req.body["txt18"],
-      T1data11: req.body["txt19"],
-      d_id: id,
-    };
-
-    let data3 ={
-      T2data1: req.body["txt20"],
-      T2data2: req.body["txt21"],
-      T2data3: req.body["txt23"],
-      d_id: id,
+      img_id: id,
+      d_id: req.body["id"],
     }
-    console.log(data);
-    console.log(id);
 
-    //console.log('connected as id ' + connection.threadId);
+    connection.query(`INSERT INTO doc_img SET ?`, [data], (error, results, fields) =>{
+      if(error) console.log(error);
+      
+        // res.send(results)
+        res.send("File is uploaded successfully!");
+      
+    })
 
-    connection.beginTransaction(function(err) {
+  });
+});
+
+/*----------------------------//Create New Document//-------------------------------*/
+
+// router.post("/newdocument", authToken, multer().none(), (req, res)=>{
+app.post("/newdocument", authToken, multer().none(), (req, res)=>{
+  id = gid().toString()
+
+  let data = {
+
+          ID: id,
+          data1: req.body["txt1"],
+          data2: req.body["txt2"],
+          data3: req.body["txt3"],
+          data4: req.body["txt4"],
+          data5: req.body["txt5"],
+          data6: req.body["txt6"],
+          data7: req.body["txt7"],
+          data8: req.body["txt8"],
+          data9: req.body["txt20"],
+          data10: req.body["txt21"],
+          data11: req.body["txt22"],
+        };
+    
+  let data2 ={
+          T1data1: req.body["txt9"],
+          T1data2: req.body["txt10"],
+          T1data3: req.body["txt11"],
+          T1data4: req.body["txt12"],
+          T1data5: req.body["txt13"],
+          T1data6: req.body["txt14"],
+          T1data7: req.body["txt15"],
+          T1data8: req.body["txt16"],
+          T1data9: req.body["txt17"],
+          T1data10: req.body["txt18"],
+          T1data11: req.body["txt19"],
+          d_id: id,
+        };
+console.log(data);
+      connection.beginTransaction(function(err) {
       if (err) { throw err; }
       connection.query('INSERT INTO document SET ?', data, function (error, results, fields) {
         if (error) {
@@ -129,14 +142,6 @@ app.post("/upload", function (req, res) {
               throw error;
             });
           }
-        
-     
-        connection.query('INSERT INTO table3 SET ?', data3, function (error, results, fields) {
-          if (error) {
-            return connection.rollback(function() {
-              throw error;
-            });
-          }
           connection.commit(function(err) {
             if (err) {
               return connection.rollback(function() {
@@ -145,11 +150,10 @@ app.post("/upload", function (req, res) {
             }
             console.log('success!');
           });
-        });
+        
       });
       });
     });
-  });
 
   res.send("File is uploaded successfully!");
 });
@@ -287,45 +291,67 @@ app.post("/search", authToken, multer().none(), (req, res) => {
 
 app.post("/deletedoc", authToken, multer().none(), (req, res) => {
   //console.log(req.body["id"]);
+  let img_id = null
   connection.beginTransaction(function(err) {
     if (err) { throw err; }
-    connection.query('DELETE FROM table3 WHERE d_id=?', [req.body["id"]], function (error, results, fields) {
+
+    connection.query(`SELECT img_id FROM doc_img WHERE d_id=?`, [req.body["id"]], function (error, results, fields) {
       if (error) {
         return connection.rollback(function() {
-          console.log(error);
+          throw error;
         });
       }
-   
-  
-      connection.query('DELETE FROM table1 WHERE d_id=?', [req.body["id"]], function (error, results, fields) {
-        if (error) {
-          return connection.rollback(function() {
-            throw error;
-          });
-        }
+
+      if(results.length !== 0){ img_id = results[0].img_id }
       
-   
-      connection.query('DELETE FROM document WHERE ID=?', [req.body["id"]], function (error, results, fields) {
+      connection.query(`DELETE FROM doc_img WHERE d_id=?`, [req.body["id"]], function (error, results, fields) {
         if (error) {
           return connection.rollback(function() {
             throw error;
           });
         }
-        connection.commit(function(err) {
-          if (err) {
+
+        connection.query('DELETE FROM table3 WHERE d_id=?', [req.body["id"]], function (error, results, fields) {
+          if (error) {
             return connection.rollback(function() {
-              console.log(err);;
+              console.log(error);
             });
           }
-          console.log('success!');
-          res.json('success!')
+   
+  
+          connection.query('DELETE FROM table1 WHERE d_id=?', [req.body["id"]], function (error, results, fields) {
+            if (error) {
+              return connection.rollback(function() {
+                throw error;
+              });
+            }
+            connection.query('DELETE FROM document WHERE ID=?', [req.body["id"]], function (error, results, fields) {
+              if (error) {
+                return connection.rollback(function() {
+                  throw error;
+                });
+              }
+      
+              connection.commit(function(err) {
+                if (err) {
+                  return connection.rollback(function() {
+                    console.log(err);;
+                  });
+                }
+                if(img_id != null) {
+                  let filePath = `/home/root-x/Documents/React_JS/react/my-project/public/uploads/${img_id}`;
+                  fs.unlinkSync(filePath);
+                }
+                console.log('success!');
+                res.json('success!')
+              });
+            });
+          });
         });
       });
     });
-    });
   });
-
-})
+});
 
 app.post("/deletetable1", authToken, multer().none(), (req, res) => {
   //console.log(req.body["id"]);
@@ -436,3 +462,75 @@ app.post("/updaterowtable2", authToken, multer().none(), (req, res) => {
     
   })
 })
+
+/*----------------------------//Get Image//-------------------------------*/
+
+app.post("/getimage", authToken, multer().none(), (req, res) => {
+  
+  connection.query(`SELECT img_id FROM doc_img WHERE d_id=?`, [req.body["id"]], (error, results, fields) =>{
+    if(error) console.log(error);
+    
+      res.json(results)
+    
+  })
+})
+
+/*----------------------------//Delete Image//-------------------------------*/
+
+// app.post("/delimage", authToken, multer().none(), (req, res) => {
+//   // var filePath = '/home/root-x/Documents/React_JS/react/my-project/public/uploads'; 
+ 
+//   try{
+//     connection.query(`DELETE FROM doc_img WHERE d_id=?`, [req.body["id"]], (error, results, fields) =>{
+//       console.log(error);
+//       console.log(results);
+//       res.json(results)
+//     })
+//   } catch (e){
+//     res.json("Cant upload")
+//   }
+
+// })
+
+app.post("/delimage", authToken, multer().none(), (req, res) => {
+  // var filePath = '/home/root-x/Documents/React_JS/react/my-project/public/uploads'; 
+ let img_id = null
+  // try{
+    connection.beginTransaction(function(err) {
+      if (err) { throw err; }
+      connection.query(`SELECT img_id FROM doc_img WHERE d_id=?`, [req.body["id"]], function (error, results, fields) {
+        if (error) {
+          return connection.rollback(function() {
+            throw error;
+          });
+        }
+        img_id = results[0].img_id
+        connection.query(`DELETE FROM doc_img WHERE d_id=?`, [req.body["id"]], function (error, results, fields) {
+          if (error) {
+            return connection.rollback(function() {
+              throw error;
+            });
+          }
+          connection.commit(function(err) {
+            if (err) {
+              return connection.rollback(function() {
+                throw err;
+              });
+            }
+            let filePath = `/home/root-x/Documents/React_JS/react/my-project/public/uploads/${img_id}`;
+            fs.unlinkSync(filePath);
+            // console.log(img_id);
+            console.log('success!');
+            // res.json("success!")
+          });
+        
+      });
+      });
+    });
+    res.json("success!")
+  // } catch (e){
+  //   res.json("Cant upload")
+  // }
+
+})
+

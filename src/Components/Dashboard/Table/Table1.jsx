@@ -204,6 +204,7 @@ export default function CustomPaginationActionsTable(props) {
 
   return (
     <div>
+      
       {/* **************************************************Dialog Box********************************************************* */}
       { handleClickOpen ? <DialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)
       props.onDelete(data);

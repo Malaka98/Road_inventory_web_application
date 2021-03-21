@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from "axios";
-import CryptoJS from 'crypto-js';
+//import CryptoJS from 'crypto-js';
 
 
 
@@ -35,11 +35,11 @@ export default function Gard(GardComponents) {
         }).then((response)=>{
           
           if(typeof(response.data.uinfo)!='undefined') {
-            let bytes  = CryptoJS.AES.decrypt(response.data.uinfo, '123')
-            let decInfo = bytes.toString(CryptoJS.enc.Utf8)
+            // let bytes  = CryptoJS.AES.decrypt(response.data.uinfo, '123')
+            // let decInfo = bytes.toString(CryptoJS.enc.Utf8)
             
             // console.log(response);
-            console.log(decInfo);
+            //console.log(decInfo);
             // console.log(typeof(decInfo));
             
             if(response.data.auth === "login") {
@@ -67,7 +67,6 @@ export default function Gard(GardComponents) {
       }
 
     render() {
-      
       if(this.state.auth) return <GardComponents/>
       
       return this.state.isLoading ? <CircularProgress /> : <Redirect to='/' />
