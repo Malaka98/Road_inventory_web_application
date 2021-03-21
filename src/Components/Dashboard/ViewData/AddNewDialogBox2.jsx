@@ -37,14 +37,14 @@ export default function AddNewDialogBox2(props) {
 
     if (!values.txt20) {
       errors.txt20 = "Required";
-    } else if (values.txt20.length > 15) {
-      errors.txt20 = "Must be 15 characters or less";
+    } else if (values.txt20.length > 100) {
+      errors.txt20 = "Must be 100 characters or less";
     }
 
     if (!values.txt21) {
       errors.txt21 = "Required";
-    } else if (values.txt21.length > 15) {
-      errors.txt21 = "Must be 15 characters or less";
+    } else if (values.txt21.length > 100) {
+      errors.txt21 = "Must be 100 characters or less";
     }
 
     return errors;

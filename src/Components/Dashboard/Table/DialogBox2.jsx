@@ -48,8 +48,8 @@ export default function DialogBox2(props) {
     
         if (!values.txt21) {
           errors.txt21 = "Required";
-        } else if (values.txt21.length > 15) {
-          errors.txt21 = "Must be 15 characters or less";
+        } else if (values.txt21.length > 50) {
+          errors.txt21 = "Must be 50 characters or less";
         }
     
         return errors;

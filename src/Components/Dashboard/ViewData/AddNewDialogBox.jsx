@@ -36,56 +36,56 @@ export default function AddNewDialogBox(props) {
     
         if (!values.txt9) {
           errors.txt9 = "Required";
-        } else if (values.txt9.length > 15) {
-          errors.txt9 = "Must be 15 characters or less";
+        } else if (values.txt9.length > 100) {
+          errors.txt9 = "Must be 100 characters or less";
         }
     
         if (!values.txt10) {
           errors.txt10 = "Required";
-        } else if (values.txt10.length > 15) {
-          errors.txt10 = "Must be 15 characters or less";
+        } else if (values.txt10.length > 100) {
+          errors.txt10 = "Must be 100 characters or less";
         }
     
         if (!values.txt11) {
           errors.txt11 = "Required";
-        } else if (values.txt11.length > 15) {
-          errors.txt11 = "Must be 15 characters or less";
+        } else if (values.txt11.length > 100) {
+          errors.txt11 = "Must be 100 characters or less";
         }
     
         if (!values.txt12) {
           errors.txt12 = "Required";
-        } else if (values.txt12.length > 15) {
-          errors.txt12 = "Must be 15 characters or less";
+        } else if (values.txt12.length > 100) {
+          errors.txt12 = "Must be 100 characters or less";
         }
     
         if (!values.txt13) {
           errors.txt13 = "Required";
-        } else if (values.txt13.length > 15) {
-          errors.txt13 = "Must be 15 characters or less";
+        } else if (values.txt13.length > 100) {
+          errors.txt13 = "Must be 100 characters or less";
         }
     
         if (!values.txt14) {
           errors.txt14 = "Required";
-        } else if (values.txt14.length > 15) {
-          errors.txt14 = "Must be 15 characters or less";
+        } else if (values.txt14.length > 100) {
+          errors.txt14 = "Must be 100 characters or less";
         }
     
         if (!values.txt15) {
           errors.txt15 = "Required";
-        } else if (values.txt15.length > 15) {
-          errors.txt15 = "Must be 15 characters or less";
+        } else if (values.txt15.length > 100) {
+          errors.txt15 = "Must be 100 characters or less";
         }
     
         if (!values.txt16) {
           errors.txt16 = "Required";
-        } else if (values.txt16.length > 15) {
-          errors.txt16 = "Must be 15 characters or less";
+        } else if (values.txt16.length > 100) {
+          errors.txt16 = "Must be 100 characters or less";
         }
     
         if (!values.txt17) {
           errors.txt17 = "Required";
-        } else if (values.txt17.length > 15) {
-          errors.txt17 = "Must be 15 characters or less";
+        } else if (values.txt17.length > 100) {
+          errors.txt17 = "Must be 100 characters or less";
         }
     
         if (!values.txt18) {
