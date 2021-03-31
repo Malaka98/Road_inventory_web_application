@@ -208,6 +208,7 @@ function ImageUpload() {
 
                   reader.onloadend = () => {
                     setpicUrl(reader.result);
+                    // console.log(reader);
                     // console.log(reader.result);
                   };
 

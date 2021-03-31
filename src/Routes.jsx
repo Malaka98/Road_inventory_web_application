@@ -5,6 +5,7 @@ import Login from './Components/Login/Login'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Form from './Components/Dashboard/Form/CreateNewForm'
 import FullDetail from "./Components/Dashboard/ViewData/FullDetail";
+import View from './Components/SearchData/View'
 
 
 export default function AppRoutes() {
@@ -23,8 +24,12 @@ export default function AppRoutes() {
             component: FullDetail,
         },
         {
-            path: '/',
+            path: '/login',
             component: Login,
+        },
+        {
+            path: '/',
+            component: View,
         }
     
     ]

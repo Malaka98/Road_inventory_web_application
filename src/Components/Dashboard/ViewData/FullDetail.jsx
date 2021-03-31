@@ -88,7 +88,7 @@ function ViewDoc() {
           method: "post",
           url: "http://localhost:4000/getfulldetail",
           data: formdata,
-          withCredentials: true,
+          // withCredentials: true,
         });
       // console.log(response);
 
