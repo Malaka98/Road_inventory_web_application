@@ -20,10 +20,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import FolderIcon from '@material-ui/icons/Folder';
+import FolderIcon from "@material-ui/icons/Folder";
 import { useHistory } from "react-router-dom";
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -110,7 +108,7 @@ export default function ElevateAppBar(props) {
       <Toolbar />
       <Paper elevation={0} className={classes.root}>
         <Grid item className={classes.sbtn}>
-          <SearchBox 
+          <SearchBox
             name={(data) => {
               setData({
                 res: data,
@@ -122,9 +120,9 @@ export default function ElevateAppBar(props) {
           <List component="nav" aria-label="contacts">
             {data.res.map((data, key) => (
               <div key={key}>
-
-                <ListItem button
-                   onClick={() => {
+                <ListItem
+                  button
+                  onClick={() => {
                     select(data.ID);
                     // console.log(data.ID);
                   }}
@@ -134,13 +132,10 @@ export default function ElevateAppBar(props) {
                   </ListItemIcon>
                   <ListItemText primary={data.data2} />
                 </ListItem>
-
               </div>
             ))}
           </List>
         </Grid>
-
-      
       </Paper>
 
       {console.log(data.res)}

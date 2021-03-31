@@ -86,21 +86,19 @@ export default function AddNewDialogBox2(props) {
   });
 
   return (
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        disableBackdropClick
-        disableEscapeKeyDown
-        maxWidth="xl"
-      >
-        <form onSubmit={formik.handleSubmit}>
-          <DialogTitle id="form-dialog-title">Enter Data</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Enter new data for a new record
-            </DialogContentText>
-            <Grid style={{ width: "800px" }}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+      disableBackdropClick
+      disableEscapeKeyDown
+      maxWidth="xl"
+    >
+      <form onSubmit={formik.handleSubmit}>
+        <DialogTitle id="form-dialog-title">Enter Data</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Enter new data for a new record</DialogContentText>
+          <Grid style={{ width: "800px" }}>
             <Grid>
               <Grid
                 container
@@ -190,18 +188,18 @@ export default function AddNewDialogBox2(props) {
                 />
               </Grid>
             </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            {/* onClick={handleClose} */}
-            <Button type="submit" color="primary">
-              Insert
-            </Button>
-          </DialogActions>
-        </form>
-      </Dialog>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          {/* onClick={handleClose} */}
+          <Button type="submit" color="primary">
+            Insert
+          </Button>
+        </DialogActions>
+      </form>
+    </Dialog>
   );
 }

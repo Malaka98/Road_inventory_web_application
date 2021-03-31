@@ -141,13 +141,13 @@ export default function DialogBox1(props) {
         data: formdata,
         withCredentials: true,
       })
-        .then(function(response) {
+        .then(function (response) {
           //handle success
           console.log(response);
           setOpen(false);
           props.callBack(false);
         })
-        .catch(function(response) {
+        .catch(function (response) {
           //handle error
           console.log(response);
         });

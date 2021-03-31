@@ -18,7 +18,6 @@ import DialogBox from "./DialogBox";
 import { AutoSizer, List } from "react-virtualized";
 
 const useStyles = makeStyles((theme) => ({
-
   list: {
     backgroundColor: "white",
     padding: "10px",
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     padding: "10px",
     textAlign: "Center",
-  }
+  },
 }));
 
 function ViewDoc() {
@@ -191,7 +190,7 @@ function ViewDoc() {
           }}
         />
       </Grid>
-      
+
       {data.received ? (
         <div className={classes.loading}>Loading...</div>
       ) : data.res.length !== 0 ? (
@@ -210,7 +209,6 @@ function ViewDoc() {
       ) : (
         <div className={classes.err}>Not data found</div>
       )}
-     
     </div>
   );
 }

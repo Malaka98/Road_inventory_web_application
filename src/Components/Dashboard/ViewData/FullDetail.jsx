@@ -6,20 +6,18 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { useLocation } from "react-router";
-
-
 
 import Table1 from "../Table/Table1";
 import Table2 from "../Table/Table2";
 import Button from "@material-ui/core/Button";
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
-import AddNewDialogBox from './AddNewDialogBox';
-import AddNewDialogBox2 from './AddNewDialogBox2';
-import ImageUpload from './ImageUpload';
+import AddNewDialogBox from "./AddNewDialogBox";
+import AddNewDialogBox2 from "./AddNewDialogBox2";
+import ImageUpload from "./ImageUpload";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,16 +47,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ViewDoc() {
-
   // const [Tdata, setTdata] = useState([{}]);
   // const [T1data, setT1data] = useState([{}]);
   // const [T2data, setT2data] = useState([{}]);
   const [Data, setData] = useState({
     Tdata: [{}],
     T1data: [{}],
-    T2data: [{},]
-  })
-  const [load, setload] = useState(false)
+    T2data: [{}],
+  });
+  const [load, setload] = useState(false);
 
   const [handleClickOpen, sethandleClickOpen] = useState(false);
   const [id, setid] = useState();
@@ -75,7 +72,6 @@ function ViewDoc() {
   let query = useQuery();
   //console.log(query.get("id"));
 
-
   useEffect(() => {
     genarate();
   }, []);
@@ -85,11 +81,11 @@ function ViewDoc() {
       const formdata = new FormData();
       formdata.append("id", query.get("id"));
       const response = await axios({
-          method: "post",
-          url: "http://localhost:4000/getfulldetail",
-          data: formdata,
-          // withCredentials: true,
-        });
+        method: "post",
+        url: "http://localhost:4000/getfulldetail",
+        data: formdata,
+        // withCredentials: true,
+      });
       // console.log(response);
 
       // setTdata(response.data.document);
@@ -110,22 +106,46 @@ function ViewDoc() {
         Tdata: response.data.document,
         T1data: response.data.table1,
         T2data: response.data.table2,
-      })
+      });
 
-        setload(true)
+      setload(true);
     } catch (error) {
       console.error(error);
     }
   }
 
-
   // const matches = useMediaQuery("(min-width:770px)");
   return (
-
     <div className={classes.root}>
-{ handleClickOpen ? <AddNewDialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)}} callBack2={() => {genarate()}}/> : ""}
-{ handleClickOpen2 ? <AddNewDialogBox2 handleOpen={handleClickOpen2} id={id2} callBack={(data) => {sethandleClickOpen2(data)}} callBack2={() => {genarate()}}/> : ""}
-      
+      {handleClickOpen ? (
+        <AddNewDialogBox
+          handleOpen={handleClickOpen}
+          id={id}
+          callBack={(data) => {
+            sethandleClickOpen(data);
+          }}
+          callBack2={() => {
+            genarate();
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {handleClickOpen2 ? (
+        <AddNewDialogBox2
+          handleOpen={handleClickOpen2}
+          id={id2}
+          callBack={(data) => {
+            sethandleClickOpen2(data);
+          }}
+          callBack2={() => {
+            genarate();
+          }}
+        />
+      ) : (
+        ""
+      )}
+
       <Container maxWidth="xl" className={classes.con}>
         <Typography
           variant="h4"
@@ -389,10 +409,7 @@ function ViewDoc() {
                 </Paper>
               </Grid>
               <Grid item xs={12} lg={4}>
-                
-              <ImageUpload/>
-
-
+                <ImageUpload />
               </Grid>
             </Grid>
             <Grid
@@ -405,7 +422,7 @@ function ViewDoc() {
                 variant="contained"
                 color="primary"
                 style={{ marginBottom: "20px", backgroundColor: "#62C95E" }}
-                onClick={()=>{
+                onClick={() => {
                   sethandleClickOpen(true);
                   setid(query.get("id"));
                 }}
@@ -413,15 +430,17 @@ function ViewDoc() {
                 ADD NEW
               </Button>
             </Grid>
-            
-            
-            {load ?   <Table1
-              row={Data.T1data}
-              onDelete={(data) => {
-                genarate();
-              }}
-            /> : <div>Loading...</div> }
-            
+
+            {load ? (
+              <Table1
+                row={Data.T1data}
+                onDelete={(data) => {
+                  genarate();
+                }}
+              />
+            ) : (
+              <div>Loading...</div>
+            )}
 
             <Divider className={classes.divider} />
             <Grid
@@ -434,7 +453,7 @@ function ViewDoc() {
                 variant="contained"
                 color="primary"
                 style={{ marginBottom: "20px", backgroundColor: "#62C95E" }}
-                onClick={()=>{
+                onClick={() => {
                   sethandleClickOpen2(true);
                   setid2(query.get("id"));
                 }}
@@ -443,11 +462,16 @@ function ViewDoc() {
               </Button>
             </Grid>
 
-            {load ? <Table2 row={Data.T2data}
-                    onDelete={(data) => {
-                      genarate();
-                    }}
-            /> : <div>Loading...</div>}
+            {load ? (
+              <Table2
+                row={Data.T2data}
+                onDelete={(data) => {
+                  genarate();
+                }}
+              />
+            ) : (
+              <div>Loading...</div>
+            )}
 
             <Divider className={classes.divider} />
           </Paper>

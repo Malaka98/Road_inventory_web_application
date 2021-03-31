@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SearchBox(props) {
   const classes = useStyles();
-    const searchKey = useRef("")
+  const searchKey = useRef("");
 
   function genarate(value) {
     const formdata = new FormData();
@@ -43,13 +43,13 @@ function SearchBox(props) {
       data: formdata,
       withCredentials: true,
     })
-      .then(function(response) {
+      .then(function (response) {
         //handle success
         console.log(response.data);
 
         props.name(response.data);
       })
-      .catch(function(response) {
+      .catch(function (response) {
         //handle error
         console.log(response);
       });
@@ -67,8 +67,8 @@ function SearchBox(props) {
             genarate(e.target.value);
           }
         }}
-        onChange={(e)=>{
-            searchKey.current = e.target.value
+        onChange={(e) => {
+          searchKey.current = e.target.value;
         }}
       />
       <IconButton
@@ -76,10 +76,8 @@ function SearchBox(props) {
         className={classes.iconButton}
         aria-label="search"
         onClick={() => {
-            
-              genarate(searchKey.current);
-            
-          }}
+          genarate(searchKey.current);
+        }}
       >
         <SearchIcon />
       </IconButton>

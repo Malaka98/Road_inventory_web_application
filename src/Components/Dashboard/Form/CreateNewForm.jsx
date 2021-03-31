@@ -17,7 +17,7 @@ import { useFormik } from "formik";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 
-import { useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     padding: "20px",
     overflow: "auto",
-
   },
   con: {
     //backgroundColor: "white",
@@ -51,39 +50,34 @@ const useStyles = makeStyles((theme) => ({
   errmsg: {
     color: "#d50000",
   },
-
 }));
-
-
 
 function ComplexGrid() {
   const classes = useStyles();
 
-  const history = useHistory()
-
+  const history = useHistory();
 
   const validate = (values) => {
-    
     const errors = {};
-    
+
     if (!values.txt1) {
       errors.txt1 = "Required";
     } else if (values.txt1.length > 100) {
       errors.txt1 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt2) {
       errors.txt2 = "Required";
     } else if (values.txt2.length > 100) {
       errors.txt2 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt3) {
       errors.txt3 = "Required";
     } else if (values.txt3.length > 100) {
       errors.txt3 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt4) {
       errors.txt4 = "Required";
     } else if (values.txt4.length > 100) {
@@ -94,93 +88,91 @@ function ComplexGrid() {
     } else if (values.txt5.length > 100) {
       errors.txt5 = "Must be 10 characters or less";
     }
-  
+
     if (!values.txt6) {
       errors.txt6 = "Required";
     } else if (values.txt6.length > 100) {
       errors.txt6 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt7) {
       errors.txt7 = "Required";
     } else if (values.txt7.length > 100) {
       errors.txt7 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt8) {
       errors.txt8 = "Required";
     } else if (values.txt8.length > 100) {
       errors.txt8 = "Must be 100 characters or less";
     }
-  
+
     if (!values.select) {
       errors.select = "Required";
     } else if (values.select.length > 100) {
       errors.select = "Must be 100 characters or less";
     }
-  
 
-  
     if (!values.txt9) {
       errors.txt9 = "Required";
     } else if (values.txt9.length > 100) {
       errors.txt9 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt10) {
       errors.txt10 = "Required";
     } else if (values.txt10.length > 100) {
       errors.txt10 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt11) {
       errors.txt11 = "Required";
     } else if (values.txt11.length > 100) {
       errors.txt11 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt12) {
       errors.txt12 = "Required";
     } else if (values.txt12.length > 100) {
       errors.txt12 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt13) {
       errors.txt13 = "Required";
     } else if (values.txt13.length > 100) {
       errors.txt13 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt14) {
       errors.txt14 = "Required";
     } else if (values.txt14.length > 100) {
       errors.txt14 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt15) {
       errors.txt15 = "Required";
     } else if (values.txt15.length > 100) {
       errors.txt15 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt16) {
       errors.txt16 = "Required";
     } else if (values.txt16.length > 100) {
       errors.txt16 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt17) {
       errors.txt17 = "Required";
     } else if (values.txt17.length > 100) {
       errors.txt17 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt18) {
       errors.txt18 = "Required";
     } else if (values.txt18.length > 100) {
       errors.txt18 = "Must be 100 characters or less";
     }
-  
+
     if (!values.txt19) {
       errors.txt19 = "Required";
     } else if (values.txt19.length > 100) {
@@ -189,7 +181,7 @@ function ComplexGrid() {
 
     return errors;
   };
-  
+
   const formik = useFormik({
     initialValues: {
       txt1: "",
@@ -215,12 +207,11 @@ function ComplexGrid() {
       txt17: "",
       txt18: "",
       txt19: "",
-
     },
     validate,
     onSubmit: (values) => {
       const formdata = new FormData();
-      
+
       formdata.append("txt1", values.txt1);
       formdata.append("txt2", values.txt2);
       formdata.append("txt3", values.txt3);
@@ -232,7 +223,7 @@ function ComplexGrid() {
       formdata.append("txt20", values.select);
       formdata.append("txt21", values.otxt1);
       formdata.append("txt22", values.otxt2);
-      
+
       formdata.append("txt9", values.txt9);
       formdata.append("txt10", values.txt10);
       formdata.append("txt11", values.txt11);
@@ -244,7 +235,6 @@ function ComplexGrid() {
       formdata.append("txt17", values.txt17);
       formdata.append("txt18", values.txt18);
       formdata.append("txt19", values.txt19);
-
 
       axios({
         method: "post",
@@ -265,19 +255,17 @@ function ComplexGrid() {
         .then(function (response) {
           //handle success
           console.log(response);
-          history.push('/dashboard')
+          history.push("/dashboard");
         })
         .catch(function (response) {
           //handle error
           console.log(response);
         });
-      
     },
   });
-  
+
   return (
     <div className={classes.root}>
-      
       <Container maxWidth="md" className={classes.con}>
         <Typography
           variant="h4"
@@ -837,7 +825,6 @@ function ComplexGrid() {
                 </Grid>
               </Paper>
             </Grid>
-            
           </Grid>
         </form>
       </Container>

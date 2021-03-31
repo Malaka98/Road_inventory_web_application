@@ -16,7 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Badge from '@material-ui/core/Badge';
+import Badge from "@material-ui/core/Badge";
 
 import { Link } from "react-router-dom";
 
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logotxt: {
     fontWeight: "bold",
-  }
+  },
 }));
 
 function ResponsiveDrawer(props) {
@@ -105,9 +105,11 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <div >
+      <div>
         <Badge color="secondary" variant="dot" className={classes.logo}>
-          <Typography variant="h6" className={classes.logotxt}>Admin Dashboard</Typography>
+          <Typography variant="h6" className={classes.logotxt}>
+            Admin Dashboard
+          </Typography>
         </Badge>
       </div>
       <Divider />

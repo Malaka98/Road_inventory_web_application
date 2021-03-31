@@ -43,12 +43,11 @@ function ImageUpload() {
 
   useEffect(() => {
     get_img();
-  }, [])
+  }, []);
 
   const get_img = () => {
-
     let imagedata = new FormData();
-      imagedata.append("id", query.get("id"));
+    imagedata.append("id", query.get("id"));
 
     axios({
       method: "post",
@@ -66,23 +65,24 @@ function ImageUpload() {
         // let img = window.location.origin + `/uploads/${response.data.img_id}`;
         // console.log(response.data[0].img_id);
         // console.log(response.data);
-        if(response.data.length !==0) {
+        if (response.data.length !== 0) {
           u_btn.current = false;
-          setpicUrl(window.location.origin + `/uploads/${response.data[0].img_id}`);
+          setpicUrl(
+            window.location.origin + `/uploads/${response.data[0].img_id}`
+          );
         }
-        
+
         // console.log(picUrl);
         // console.log(response);
       })
       .catch((response) => {
         console.log(response);
       });
-  }
+  };
 
   const del_img = () => {
-
     let imagedata = new FormData();
-      imagedata.append("id", query.get("id"));
+    imagedata.append("id", query.get("id"));
 
     axios({
       method: "post",
@@ -107,7 +107,7 @@ function ImageUpload() {
       .catch((response) => {
         console.log(response);
       });
-  }
+  };
 
   const validate = (values) => {
     let errors = {};
@@ -115,7 +115,7 @@ function ImageUpload() {
     if (fileInput.current.files.length === 0) {
       errors.file = "Please insert Image";
     } else if (fileInput.current.files[0].type !== "image/png") {
-      if(fileInput.current.files[0].type !== "image/jpeg"){
+      if (fileInput.current.files[0].type !== "image/jpeg") {
         errors.file = "not valid";
       }
       // console.log(fileInput.current.files[0].type);
@@ -134,17 +134,17 @@ function ImageUpload() {
     validate,
     onSubmit: (values) => {
       let imagedata = new FormData();
-      
+
       imagedata.append("img", fileInput.current.files[0]);
       imagedata.append("id", query.get("id"));
-        // console.log(query.get("id"));
-        // console.log(fileInput.current.files[0]);
+      // console.log(query.get("id"));
+      // console.log(fileInput.current.files[0]);
       axios({
         method: "post",
         url: "http://localhost:4000/upload",
         data: imagedata,
         headers: {
-            "content-type": "multipart/form-data",
+          "content-type": "multipart/form-data",
         },
         // onUploadProgress: (ProgressEvent) => {
         //     const {loaded, total } = ProgressEvent;
@@ -220,36 +220,40 @@ function ImageUpload() {
               {formik.errors.file && formik.touched.file ? (
                 <div style={{ color: "red" }}>{formik.errors.file}</div>
               ) : null}
-              {u_btn.current ? <div>
-                <label htmlFor="icon-button-file">
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="span"
+              {u_btn.current ? (
+                <div>
+                  <label htmlFor="icon-button-file">
+                    <IconButton
+                      color="primary"
+                      aria-label="upload picture"
+                      component="span"
+                    >
+                      <PhotoCamera style={{ fontSize: 40 }} />
+                    </IconButton>
+                  </label>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<CloudUploadIcon />}
+                    type="submit"
+                  >
+                    Upload
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                  startIcon={<CloudUploadIcon />}
+                  onClick={() => {
+                    del_img();
+                  }}
                 >
-                  <PhotoCamera style={{ fontSize: 40 }} />
-                </IconButton>
-              </label>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                startIcon={<CloudUploadIcon />}
-                type="submit"
-              >
-                Upload
-              </Button>
-              </div> :<Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                startIcon={<CloudUploadIcon />}
-                onClick={()=>{
-                  del_img();
-                }}
-              >
-                Delete
-              </Button>}
+                  Delete
+                </Button>
+              )}
             </form>
           </Grid>
         </Grid>

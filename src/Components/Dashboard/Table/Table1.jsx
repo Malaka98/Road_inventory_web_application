@@ -17,7 +17,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import TableHead from "@material-ui/core/TableHead";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import DialogBox from './DialogBox1'
+import DialogBox from "./DialogBox1";
 
 import axios from "axios";
 
@@ -146,8 +146,8 @@ const useStyles2 = makeStyles({
 
 export default function CustomPaginationActionsTable(props) {
   //console.log(props.row);
-  const [handleClickOpen, sethandleClickOpen] = useState(false)
-  const [id, setid] = useState({})
+  const [handleClickOpen, sethandleClickOpen] = useState(false);
+  const [id, setid] = useState({});
 
   const rows = props.row.map((data, index) => {
     return createData(
@@ -191,12 +191,12 @@ export default function CustomPaginationActionsTable(props) {
       data: formdata,
       withCredentials: true,
     })
-      .then(function(response) {
+      .then(function (response) {
         //handle success
         console.log(response);
         props.onDelete(response);
       })
-      .catch(function(response) {
+      .catch(function (response) {
         //handle error
         console.log(response);
       });
@@ -204,11 +204,19 @@ export default function CustomPaginationActionsTable(props) {
 
   return (
     <div>
-      
       {/* **************************************************Dialog Box********************************************************* */}
-      { handleClickOpen ? <DialogBox handleOpen={handleClickOpen} id={id} callBack={(data) => {sethandleClickOpen(data)
-      props.onDelete(data);
-      }}/> : ""}
+      {handleClickOpen ? (
+        <DialogBox
+          handleOpen={handleClickOpen}
+          id={id}
+          callBack={(data) => {
+            sethandleClickOpen(data);
+            props.onDelete(data);
+          }}
+        />
+      ) : (
+        ""
+      )}
       {/* ******************************************************************************************************************************************** */}
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
@@ -299,12 +307,14 @@ export default function CustomPaginationActionsTable(props) {
                       </IconButton>
                     </TableCell>
                     <TableCell style={{ width: 20 }} align="center">
-                      
-                      <IconButton aria-label="delete" onClick={()=>{
-                        sethandleClickOpen(true);
-                        setid(row);
-                        //console.log(row);
-                      }}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          sethandleClickOpen(true);
+                          setid(row);
+                          //console.log(row);
+                        }}
+                      >
                         <EditIcon style={{ color: "#34989D" }} />
                       </IconButton>
                     </TableCell>
