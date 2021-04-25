@@ -113,7 +113,7 @@ export default function DialogBox2(props) {
               alignItems="center"
             >
               <InputLabel id="demo-simple-select-label">
-                ගැසට් පත්‍රයේ දිනය
+                දිනය
               </InputLabel>
               <TextField
                 id="date"

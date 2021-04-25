@@ -22,6 +22,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import FolderIcon from "@material-ui/icons/Folder";
 import { useHistory } from "react-router-dom";
+// import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,6 +107,7 @@ export default function ElevateAppBar(props) {
       </AppBar>
 
       <Toolbar />
+      {/* <Divider /> */}
       <Paper elevation={0} className={classes.root}>
         <Grid item className={classes.sbtn}>
           <SearchBox

@@ -188,7 +188,7 @@ export default function CustomPaginationActionsTable(props) {
                 ප්‍රතිසංස්කරණය
               </TableCell>
               <TableCell className={classes.tc} align="center">
-                වියදම
+                වියදම රු 
               </TableCell>
             </TableRow>
           </TableHead>
