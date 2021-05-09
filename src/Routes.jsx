@@ -6,9 +6,8 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Form from "./Components/Dashboard/Form/CreateNewForm";
 import FullDetail from "./Components/Dashboard/ViewData/FullDetail";
 import View from "./Components/SearchData/View";
-import Index from "./Components/FrontPage/index";
 import ViewFulldetail from "./Components/SearchData/Fulldetail";
-// import FrontPage from "./Components/FrontPage/index";
+
 export default function AppRoutes() {
   const routes = [
     {
@@ -30,10 +29,6 @@ export default function AppRoutes() {
     {
       path: "/login",
       component: Login,
-    },
-    {
-      path: "/frontpage",
-      component: Index,
     },
     {
       path: "/",

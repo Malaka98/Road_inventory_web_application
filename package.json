@@ -13,7 +13,6 @@
     "bootstrap": "^5.0.0-beta2",
     "crypto-js": "^4.0.0",
     "formik": "^2.2.6",
-    "isotope-layout": "^3.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",

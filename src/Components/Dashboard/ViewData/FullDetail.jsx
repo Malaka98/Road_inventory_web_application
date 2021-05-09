@@ -107,7 +107,7 @@ function ViewDoc() {
         T1data: response.data.table1,
         T2data: response.data.table2,
       });
-
+      console.log(response.data);
       setload(true);
     } catch (error) {
       console.error(error);

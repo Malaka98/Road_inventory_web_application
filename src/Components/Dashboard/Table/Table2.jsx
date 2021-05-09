@@ -201,6 +201,34 @@ export default function CustomPaginationActionsTable(props) {
                 <TableCell align="left">{row.col1}</TableCell>
                 <TableCell align="center">{row.col3}</TableCell>
                 <TableCell align="center">{row.col2}</TableCell>
+                {row.delete_col ? (
+                  <>
+                    <TableCell style={{ width: 20 }} align="center">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          deleteDoc(row.delete_col);
+                        }}
+                      >
+                        <DeleteIcon style={{ color: "#fc0303" }} />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell style={{ width: 20 }} align="center">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          sethandleClickOpen(true);
+                          setid(row);
+                          //console.log(row);
+                        }}
+                      >
+                        <EditIcon style={{ color: "#34989D" }} />
+                      </IconButton>
+                    </TableCell>
+                  </>
+                ) : (
+                  <td></td>
+                )}
               </TableRow>
             ))}
 

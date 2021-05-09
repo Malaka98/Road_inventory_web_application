@@ -160,23 +160,4 @@ export default function ElevateAppBar(props) {
     </React.Fragment>
   );
 }
-
-{/* <List component="nav" aria-label="contacts">
-  {data.res.map((data, key) => (
-    <div key={key}>
-      <ListItem
-        button
-        onClick={() => {
-          select(data.ID);
-          // console.log(data.ID);
-        }}
-      >
-        <ListItemIcon>
-          <FolderIcon />
-        </ListItemIcon>
-        <ListItemText primary={data.data2} />
-      </ListItem>
-    </div>
-  ))}
-  {/* <h2>**************************************</h2> */}
 // </List>; */}
