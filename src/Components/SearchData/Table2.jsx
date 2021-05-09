@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -15,10 +15,6 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import TableHead from "@material-ui/core/TableHead";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import axios from "axios";
-import DialogBox2 from "./DialogBox2";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -115,8 +111,7 @@ const useStyles2 = makeStyles({
 });
 
 export default function CustomPaginationActionsTable(props) {
-  const [handleClickOpen, sethandleClickOpen] = useState(false);
-  const [id, setid] = useState({});
+
 
   const rows = props.row.map((data, index) => {
     return createData(data.T2data3, data.T2data2, data.T2data1, data.t2_id);
@@ -139,41 +134,9 @@ export default function CustomPaginationActionsTable(props) {
     setPage(0);
   };
 
-  function deleteDoc(id) {
-    const formdata = new FormData();
-    formdata.append("id", id);
-    axios({
-      method: "post",
-      url: "http://localhost:4000/deletetable2",
-      data: formdata,
-      withCredentials: true,
-    })
-      .then(function (response) {
-        //handle success
-        console.log(response);
-        props.onDelete(response);
-      })
-      .catch(function (response) {
-        //handle error
-        console.log(response);
-      });
-  }
-
   return (
     <div>
       {/* **************************************************Dialog Box********************************************************* */}
-      {handleClickOpen ? (
-        <DialogBox2
-          handleOpen={handleClickOpen}
-          id={id}
-          callBack={(data) => {
-            sethandleClickOpen(data);
-            props.onDelete(data);
-          }}
-        />
-      ) : (
-        ""
-      )}
       {/* ******************************************************************************************************************************************** */}
 
       <TableContainer component={Paper}>

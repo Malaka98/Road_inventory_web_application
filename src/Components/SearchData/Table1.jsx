@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -15,10 +15,6 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import TableHead from "@material-ui/core/TableHead";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import axios from "axios";
-import DialogBox2 from "./DialogBox2";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -97,8 +93,34 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(col1, col2, col3, delete_col) {
-  return { col1, col2, col3, delete_col };
+function createData(
+  col1,
+  col2,
+  col3,
+  col4,
+  col5,
+  col6,
+  col7,
+  col8,
+  col9,
+  col10,
+  col11,
+  delete_col
+) {
+  return {
+    col1,
+    col2,
+    col3,
+    col4,
+    col5,
+    col6,
+    col7,
+    col8,
+    col9,
+    col10,
+    col11,
+    delete_col,
+  };
 }
 
 const useStyles2 = makeStyles({
@@ -112,17 +134,30 @@ const useStyles2 = makeStyles({
     color: "#ffffff",
     "font-weight": "bold",
   },
+  textField: {
+    margin: "10px",
+  },
 });
 
 export default function CustomPaginationActionsTable(props) {
-  const [handleClickOpen, sethandleClickOpen] = useState(false);
-  const [id, setid] = useState({});
 
   const rows = props.row.map((data, index) => {
-    return createData(data.T2data3, data.T2data2, data.T2data1, data.t2_id);
+    return createData(
+      data.T1data1,
+      data.T1data2,
+      data.T1data3,
+      data.T1data4,
+      data.T1data5,
+      data.T1data6,
+      data.T1data7,
+      data.T1data8,
+      data.T1data9,
+      data.T1data10,
+      data.T1data11,
+      data.t1_id
+    );
   });
 
-  //console.log(rows);
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -139,56 +174,44 @@ export default function CustomPaginationActionsTable(props) {
     setPage(0);
   };
 
-  function deleteDoc(id) {
-    const formdata = new FormData();
-    formdata.append("id", id);
-    axios({
-      method: "post",
-      url: "http://localhost:4000/deletetable2",
-      data: formdata,
-      withCredentials: true,
-    })
-      .then(function (response) {
-        //handle success
-        console.log(response);
-        props.onDelete(response);
-      })
-      .catch(function (response) {
-        //handle error
-        console.log(response);
-      });
-  }
-
   return (
     <div>
       {/* **************************************************Dialog Box********************************************************* */}
-      {handleClickOpen ? (
-        <DialogBox2
-          handleOpen={handleClickOpen}
-          id={id}
-          callBack={(data) => {
-            sethandleClickOpen(data);
-            props.onDelete(data);
-          }}
-        />
-      ) : (
-        ""
-      )}
       {/* ******************************************************************************************************************************************** */}
-
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead className={classes.th}>
             <TableRow>
+              <TableCell className={classes.tc}>දිනය</TableCell>
               <TableCell className={classes.tc} align="left">
-                දිනය
+                තාර දමා ඇති දුර මීටර්{" "}
               </TableCell>
-              <TableCell className={classes.tc} align="center">
-                සවිකළ උපකරණ / සිදු කල අලුත්වැඩියාව කරන ලද වැඩි දියුණු කිරීම /
-                ප්‍රතිසංස්කරණය
+              <TableCell className={classes.tc} align="left">
+                බොරළු දමා ඇති දුර මීටර්{" "}
               </TableCell>
-              <TableCell className={classes.tc} align="center">
-                වියදම රු 
+              <TableCell className={classes.tc} align="left">
+                කොන්ක්‍රීට් කර ඇති දුර මීටර්
+              </TableCell>
+              <TableCell className={classes.tc} align="left">
+                කැට ගල් අතුරා ඇති දුර මීටර්
+              </TableCell>
+              <TableCell className={classes.tc} align="left">
+                මුලු දුර මීටර්{" "}
+              </TableCell>
+              <TableCell className={classes.tc} align="left">
+                පළල මීටර්
+              </TableCell>
+              <TableCell className={classes.tc} align="left">
+                පාලම්
+              </TableCell>
+              <TableCell className={classes.tc} align="left">
+                පෙට්ටි බෝක්කු
+              </TableCell>
+              <TableCell className={classes.tc} align="left">
+                කාණු කැට යෙදූ ස්ථාන{" "}
+              </TableCell>
+              <TableCell className={classes.tc} align="left">
+                සපත්තු පාලම්
               </TableCell>
             </TableRow>
           </TableHead>
@@ -198,9 +221,39 @@ export default function CustomPaginationActionsTable(props) {
               : rows
             ).map((row, key) => (
               <TableRow key={key}>
-                <TableCell align="left">{row.col1}</TableCell>
-                <TableCell align="center">{row.col3}</TableCell>
-                <TableCell align="center">{row.col2}</TableCell>
+                <TableCell component="th" scope="row">
+                  {row.col1}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col2}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col3}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col4}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col5}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col6}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col7}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col8}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col9}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col10}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.col11}
+                </TableCell>
               </TableRow>
             ))}
 

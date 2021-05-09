@@ -14,9 +14,8 @@ import Grid from "@material-ui/core/Grid";
 
 import SearchBox from "../Dashboard/SeachBox";
 import axios from "axios";
-// import { AutoSizer, List } from "react-virtualized";
+import { AutoSizer, List } from "react-virtualized";
 
-import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -63,7 +62,7 @@ export default function ElevateAppBar(props) {
     })
       .then(function (response) {
         //handle success
-        //console.log(response.data);
+        console.log(response.data);
 
         setData({
           received: false,
@@ -82,9 +81,26 @@ export default function ElevateAppBar(props) {
 
   function select(data) {
     //console.log(data);
-    history.push("/fulldetails?id=" + data);
+    history.push("/viewfulldetail?id=" + data);
   }
   const history = useHistory();
+
+  const renderList = ({ index, key, style }) => (
+    <div key={key} style={style}>
+      <ListItem
+        button
+        onClick={() => {
+          select(data.res[index].ID);
+          // console.log(data.ID);
+        }}
+      >
+        <ListItemIcon>
+          <FolderIcon />
+        </ListItemIcon>
+        <ListItemText primary={data.res[index].data2} />
+      </ListItem>
+    </div>
+  );
 
   return (
     <React.Fragment>
@@ -115,28 +131,28 @@ export default function ElevateAppBar(props) {
               setData({
                 res: data,
               });
+              // console.log(data);
             }}
           />
         </Grid>
         <Grid item>
-          <List component="nav" aria-label="contacts">
-            {data.res.map((data, key) => (
-              <div key={key}>
-                <ListItem
-                  button
-                  onClick={() => {
-                    select(data.ID);
-                    // console.log(data.ID);
-                  }}
-                >
-                  <ListItemIcon>
-                    <FolderIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={data.data2} />
-                </ListItem>
-              </div>
-            ))}
-          </List>
+          {data.received ? (
+            <div>Loading...</div>
+          ) : data.res.length !== 0 ? (
+            <AutoSizer>
+              {({ height, width }) => (
+                <List
+                  height={800}
+                  width={width}
+                  rowRenderer={renderList}
+                  rowCount={data.res.length}
+                  rowHeight={60}
+                />
+              )}
+            </AutoSizer>
+          ) : (
+            <div>Data not found</div>
+          )}
         </Grid>
       </Paper>
 
@@ -144,3 +160,23 @@ export default function ElevateAppBar(props) {
     </React.Fragment>
   );
 }
+
+{/* <List component="nav" aria-label="contacts">
+  {data.res.map((data, key) => (
+    <div key={key}>
+      <ListItem
+        button
+        onClick={() => {
+          select(data.ID);
+          // console.log(data.ID);
+        }}
+      >
+        <ListItemIcon>
+          <FolderIcon />
+        </ListItemIcon>
+        <ListItemText primary={data.data2} />
+      </ListItem>
+    </div>
+  ))}
+  {/* <h2>**************************************</h2> */}
+// </List>; */}

@@ -53,7 +53,7 @@ function ImageUpload() {
       method: "post",
       url: "http://localhost:4000/getimage",
       data: imagedata,
-      withCredentials: true,
+      // withCredentials: true,
       // onUploadProgress: (ProgressEvent) => {
       //     const {loaded, total } = ProgressEvent;
       //     let percent = Math.floor((loaded * 100) / total);
