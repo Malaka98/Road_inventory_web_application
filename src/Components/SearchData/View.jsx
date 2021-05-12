@@ -119,7 +119,7 @@ export default function ElevateAppBar(props) {
               variant="contained"
               color="secondary"
               component={Link}
-              to={"/summary"}
+              to={"/summarylist"}
             >
               Summary Detail
             </Button>

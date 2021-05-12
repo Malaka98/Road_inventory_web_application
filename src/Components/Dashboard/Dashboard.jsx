@@ -145,7 +145,7 @@ function ResponsiveDrawer(props) {
           button
           key={"Summary Details"}
           component={Link}
-          to={"/summary"}
+          to={"/summarylist"}
         >
           <ListItemIcon>
             <CreateNewFolderIcon />
