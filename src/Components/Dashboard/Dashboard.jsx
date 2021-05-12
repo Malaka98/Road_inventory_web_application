@@ -141,6 +141,18 @@ function ResponsiveDrawer(props) {
           <ListItemText primary={"Create New Document"} />
         </ListItem>
         <Divider />
+        <ListItem
+          button
+          key={"Summary Details"}
+          component={Link}
+          to={"/summary"}
+        >
+          <ListItemIcon>
+            <CreateNewFolderIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Summary Details"} />
+        </ListItem>
+        <Divider />
       </List>
       {/* <Divider />
       <List>

@@ -68,14 +68,14 @@ const validate = (values) => {
 
   if (!values.txt7) {
     errors.txt7 = "Required";
-  } else if (values.txt7.length > 20) {
-    errors.txt7 = "Must be 20 characters or less";
+  } else if (isNaN(values.txt7)) {
+    errors.txt7 = "Please enter numeric value";
   }
 
   if (!values.txt8) {
     errors.txt8 = "Required";
-  } else if (values.txt8.length > 20) {
-    errors.txt8 = "Must be 20 characters or less";
+  } else if (isNaN(values.txt8)) {
+    errors.txt8 = "Please enter numeric value";
   }
 
   if (!values.select) {

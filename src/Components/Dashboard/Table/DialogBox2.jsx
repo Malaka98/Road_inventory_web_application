@@ -77,7 +77,7 @@ export default function DialogBox2(props) {
       })
         .then(function (response) {
           //handle success
-          console.log(response);
+          // console.log(response);
           setOpen(false);
           props.callBack(false);
         })

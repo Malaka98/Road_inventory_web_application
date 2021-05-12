@@ -150,7 +150,7 @@ export default function CustomPaginationActionsTable(props) {
     })
       .then(function (response) {
         //handle success
-        console.log(response);
+        // console.log(response);
         props.onDelete(response);
       })
       .catch(function (response) {

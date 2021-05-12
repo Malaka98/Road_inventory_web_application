@@ -36,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
   },
   ubtn: {
     marginLeft: "auto",
+    // marginRight: "20px",
+  },
+  ubtn2: {
+    marginLeft: "20px",
+    // marginRight: "20px",
   },
   sbtn: {
     margin: "20px",
@@ -62,7 +67,7 @@ export default function ElevateAppBar(props) {
     })
       .then(function (response) {
         //handle success
-        console.log(response.data);
+        // console.log(response.data);
 
         setData({
           received: false,
@@ -73,7 +78,7 @@ export default function ElevateAppBar(props) {
       })
       .catch(function (response) {
         //handle error
-        console.log(response);
+        // console.log(response);
       });
   };
 
@@ -110,6 +115,16 @@ export default function ElevateAppBar(props) {
             මාර්ග ඉන්වෙන්ට්‍රිය - නාත්තන්ඩිය ප්‍රාදේශීය සභාව
           </Typography>
           <div className={classes.ubtn}>
+            <Button
+              variant="contained"
+              color="secondary"
+              component={Link}
+              to={"/summary"}
+            >
+              Summary Detail
+            </Button>
+          </div>
+          <div className={classes.ubtn2}>
             <Button
               variant="contained"
               color="secondary"

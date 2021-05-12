@@ -7,6 +7,7 @@ import Form from "./Components/Dashboard/Form/CreateNewForm";
 import FullDetail from "./Components/Dashboard/ViewData/FullDetail";
 import View from "./Components/SearchData/View";
 import ViewFulldetail from "./Components/SearchData/Fulldetail";
+import Summary from "./Components/Summary/Summary";
 
 export default function AppRoutes() {
   const routes = [
@@ -25,6 +26,10 @@ export default function AppRoutes() {
     {
       path: "/viewfulldetail",
       component: ViewFulldetail,
+    },
+    {
+      path: "/summary",
+      component: Summary,
     },
     {
       path: "/login",

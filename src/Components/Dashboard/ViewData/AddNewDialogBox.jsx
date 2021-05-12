@@ -41,62 +41,62 @@ export default function AddNewDialogBox(props) {
 
     if (!values.txt10) {
       errors.txt10 = "Required";
-    } else if (values.txt10.length > 100) {
-      errors.txt10 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt10)) {
+      errors.txt10 = "Please enter numeric value";
     }
 
     if (!values.txt11) {
       errors.txt11 = "Required";
-    } else if (values.txt11.length > 100) {
-      errors.txt11 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt11)) {
+      errors.txt11 = "Please enter numeric value";
     }
 
     if (!values.txt12) {
       errors.txt12 = "Required";
-    } else if (values.txt12.length > 100) {
-      errors.txt12 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt12)) {
+      errors.txt12 = "Please enter numeric value";
     }
 
     if (!values.txt13) {
       errors.txt13 = "Required";
-    } else if (values.txt13.length > 100) {
-      errors.txt13 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt13)) {
+      errors.txt13 = "Please enter numeric value";
     }
 
     if (!values.txt14) {
       errors.txt14 = "Required";
-    } else if (values.txt14.length > 100) {
-      errors.txt14 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt14)) {
+      errors.txt14 = "Please enter numeric value";
     }
 
     if (!values.txt15) {
       errors.txt15 = "Required";
-    } else if (values.txt15.length > 100) {
-      errors.txt15 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt15)) {
+      errors.txt15 = "Please enter numeric value";
     }
 
     if (!values.txt16) {
       errors.txt16 = "Required";
-    } else if (values.txt16.length > 100) {
-      errors.txt16 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt16)) {
+      errors.txt16 = "Please enter numeric value";
     }
 
     if (!values.txt17) {
       errors.txt17 = "Required";
-    } else if (values.txt17.length > 100) {
-      errors.txt17 = "Must be 100 characters or less";
+    } else if (isNaN(values.txt17)) {
+      errors.txt17 = "Please enter numeric value";
     }
 
     if (!values.txt18) {
       errors.txt18 = "Required";
-    } else if (values.txt18.length > 15) {
-      errors.txt18 = "Must be 15 characters or less";
+    } else if (isNaN(values.txt18)) {
+      errors.txt18 = "Please enter numeric value";
     }
 
     if (!values.txt19) {
       errors.txt19 = "Required";
-    } else if (values.txt19.length > 15) {
-      errors.txt19 = "Must be 15 characters or less";
+    } else if (isNaN(values.txt19)) {
+      errors.txt19 = "Please enter numeric value";
     }
 
     return errors;
@@ -154,7 +154,7 @@ export default function AddNewDialogBox(props) {
         });
     },
   });
-
+  
   return (
     <Dialog
       open={open}

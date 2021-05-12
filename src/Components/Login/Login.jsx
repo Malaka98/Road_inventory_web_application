@@ -75,13 +75,13 @@ export default function Login() {
       })
         .then(function (response) {
           //handle success
-          console.log(response.data);
+          // console.log(response.data);
 
           history.push("/dashboard");
         })
         .catch(function (response) {
           //handle error
-          console.log(response);
+          // console.log(response);
         });
     },
   });
