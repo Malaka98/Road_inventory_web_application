@@ -52,6 +52,7 @@ props.rowData.map((value, key) => {
   rowData6.push(value[0]["SUM(T1data7)"]);
   rowData7.push(value[0]["SUM(T1data8)"]);
   rowData8.push(value[0]["SUM(T1data9)"]);
+  return value;
   });
 
 const rows = [
