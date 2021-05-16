@@ -33,36 +33,36 @@ const validate = (values) => {
 
   if (!values.txt1) {
     errors.txt1 = "Required";
-  } else if (values.txt1.length > 15) {
+  } else if (values.txt1.length > 100) {
     errors.txt1 = "Must be 15 characters or less";
   }
 
   if (!values.txt2) {
     errors.txt2 = "Required";
-  } else if (values.txt2.length > 20) {
+  } else if (values.txt2.length > 100) {
     errors.txt2 = "Must be 20 characters or less";
   }
 
   if (!values.txt3) {
     errors.txt3 = "Required";
-  } else if (values.txt3.length > 20) {
+  } else if (values.txt3.length > 100) {
     errors.txt3 = "Must be 20 characters or less";
   }
 
   if (!values.txt4) {
     errors.txt4 = "Required";
-  } else if (values.txt4.length > 20) {
+  } else if (values.txt4.length > 100) {
     errors.txt4 = "Must be 20 characters or less";
   }
   if (!values.txt5) {
     errors.txt5 = "Required";
-  } else if (values.txt5.length > 15) {
+  } else if (values.txt5.length > 100) {
     errors.txt5 = "Must be 15 characters or less";
   }
 
   if (!values.txt6) {
     errors.txt6 = "Required";
-  } else if (values.txt6.length > 20) {
+  } else if (values.txt6.length > 100) {
     errors.txt6 = "Must be 20 characters or less";
   }
 
@@ -80,7 +80,7 @@ const validate = (values) => {
 
   if (!values.select) {
     errors.select = "Required";
-  } else if (values.select.length > 20) {
+  } else if (values.select.length > 100) {
     errors.select = "Must be 20 characters or less";
   }
 

@@ -5,9 +5,8 @@ import { useLocation } from "react-router";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-
-
 import pic from "../Dashboard/ViewData/empty.png";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,7 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function GetImage() {
+
+
+function GetImage(props) {
+
+  // console.log(props.printData.T2data);
+
   const classes = useStyles();
   const [picUrl, setpicUrl] = useState(pic);
 
@@ -56,17 +60,12 @@ function GetImage() {
     })
       .then((response) => {
         //handle success
-        // let img = window.location.origin + `/uploads/${response.data.img_id}`;
-        // console.log(response.data[0].img_id);
-        // console.log(response.data);
+
         if (response.data.length !== 0) {
           setpicUrl(
             window.location.origin + `/uploads/${response.data[0].img_id}`
           );
         }
-
-        // console.log(picUrl);
-        // console.log(response);
       })
       .catch((response) => {
         console.log(response);
@@ -75,7 +74,6 @@ function GetImage() {
 
   return (
     <div>
-      {console.log("IMG_UP_UI")}
       <Paper className={classes.paper}>
         <Grid container direction="column" justify="center" alignItems="center">
           <Grid item xs>

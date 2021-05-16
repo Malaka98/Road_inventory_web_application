@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ImageUpload() {
+function ImageUpload(props) {
   const classes = useStyles();
   const fileInput = useRef(null);
   const u_btn = useRef(true);
@@ -242,17 +242,47 @@ function ImageUpload() {
                   </Button>
                 </div>
               ) : (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                  startIcon={<CloudUploadIcon />}
-                  onClick={() => {
-                    del_img();
-                  }}
-                >
-                  Delete
-                </Button>
+                <div>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<CloudUploadIcon />}
+                    onClick={() => {
+                      del_img();
+                    }}
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<CloudUploadIcon />}
+                    onClick={() => {
+                      import('../../SearchData/Print').then(({printPDF}) => {
+                        printPDF(
+                          picUrl,
+                          props.printData.Tdata[0].data1.toString(),
+                          props.printData.Tdata[0].data2.toString(),
+                          props.printData.Tdata[0].data3.toString(),
+                          props.printData.Tdata[0].data4.toString(),
+                          props.printData.Tdata[0].data5.toString(),
+                          props.printData.Tdata[0].data6.toString(),
+                          props.printData.Tdata[0].data7.toString(),
+                          props.printData.Tdata[0].data8.toString(),
+                          props.printData.Tdata[0].data9.toString(),
+                          props.printData.Tdata[0].data10.toString(),
+                          props.printData.Tdata[0].data11.toString(),
+                          props.printData.T1data,
+                          props.printData.T2data
+                        );
+                       })
+                    }}
+                  >
+                    Print
+                  </Button>
+                </div>
               )}
             </form>
           </Grid>

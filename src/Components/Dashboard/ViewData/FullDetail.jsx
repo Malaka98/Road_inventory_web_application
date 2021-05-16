@@ -409,7 +409,7 @@ function ViewDoc() {
                 </Paper>
               </Grid>
               <Grid item xs={12} lg={4}>
-                <ImageUpload />
+                <ImageUpload printData={Data}/>
               </Grid>
             </Grid>
             <Grid
